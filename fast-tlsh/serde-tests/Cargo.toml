@@ -14,7 +14,7 @@ serde = { version = "1.0.197", default-features = false, optional = true }
 [dev-dependencies]
 ciborium = "0.2.2"
 postcard = { version = "1.0.8", features = ["alloc", "use-std"] }
-serde_json = "1.0.114"
+serde_json = "1.0.115"
 
 [features]
 default = ["fast-tlsh/default"]
