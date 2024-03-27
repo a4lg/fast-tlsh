@@ -99,7 +99,7 @@ checksum = "ef1a6892d9eef45c8fa6b9e0086428a2cca8491aca8f787c534a3d6d0bcb3ced"
 
 [[package]]
 name = "fast-tlsh"
-version = "0.1.0"
+version = "0.2.0-alpha.0"
 dependencies = [
  "bitfield-struct",
  "bitflags",
