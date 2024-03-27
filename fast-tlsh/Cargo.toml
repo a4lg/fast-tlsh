@@ -1,0 +1,100 @@
+[package]
+name = "fast-tlsh"
+version = "0.1.0"
+description = "Library to generate / parse / compare TLSH locality sensitive hashes"
+authors = ["Tsukasa OI"]
+keywords = ["tlsh", "hash", "security", "clustering"]
+categories = ["algorithms", "encoding", "parser-implementations", "no-std::no-alloc"]
+homepage = "https://github.com/a4lg/fast-tlsh"
+repository = "https://github.com/a4lg/fast-tlsh"
+documentation = "https://docs.rs/fast-tlsh"
+license = "Apache-2.0 OR MIT"
+edition = "2021"
+readme = "../README.md"
+rust-version = "1.70"
+workspace = ".."
+
+[lib]
+name = "tlsh"
+
+[dependencies]
+bitfield-struct = "0.6.0"
+bitflags = { version = "2.5.0", default-features = false }
+cfg-if = "1.0.0"
+hex-simd = { version = "0.8.0", default-features = false, optional = true }
+num-traits = { version = "0.2.18", default-features = false }
+serde = { version = "1.0.197", default-features = false, optional = true }
+static_assertions = "1.1.0"
+
+[dev-dependencies]
+rand = "0.8.5"
+rand_xoshiro = "0.6.0"
+
+[features]
+default = ["std", "easy-functions", "opt-default", "simd", "detect-features"]
+strict-parser = []
+detect-features = ["std", "hex-simd?/detect"]
+std = ["alloc", "hex-simd?/std", "serde?/std"]
+alloc = ["hex-simd?/alloc", "serde?/alloc"]
+easy-functions = []
+serde = ["dep:serde"]
+serde-buffered = []
+simd = [
+    "opt-simd",
+    "simd-per-arch",
+]
+simd-per-arch = []
+simd-portable = ["unstable"]
+unsafe = []
+# TODO: unstable = ["serde?/unstable", "hex-simd?/unstable"]
+#       once hex-simd correctly supports the latest Nightly.
+unstable = ["serde?/unstable"]
+opt-default = [
+    "opt-dist-length-table",
+    "opt-dist-qratios-table-double",
+    "opt-pearson-table-double",
+]
+opt-embedded-default = [
+    "opt-dist-length-table",
+    "opt-dist-qratios-table",
+    "opt-low-memory-hex-str-encode-half-table",
+]
+opt-simd = [
+    "opt-simd-body-comparison",
+    "opt-simd-bucket-aggregation",
+    "opt-simd-parse-hex",
+    "opt-simd-convert-hex",
+]
+opt-simd-body-comparison = []
+opt-simd-bucket-aggregation = []
+opt-simd-parse-hex = ["dep:hex-simd"]
+opt-simd-convert-hex = ["dep:hex-simd"]
+opt-dist-length-table = []
+opt-dist-qratios-table = []
+opt-dist-qratios-table-double = [
+    "opt-dist-qratios-table",
+]
+opt-pearson-table-double = []
+opt-low-memory-buckets = []
+opt-low-memory-hex-str-decode-half-table = []
+opt-low-memory-hex-str-decode-quarter-table = [
+    "opt-low-memory-hex-str-decode-half-table",
+]
+opt-low-memory-hex-str-decode-min-table = [
+    "opt-low-memory-hex-str-decode-quarter-table",
+]
+opt-low-memory-hex-str-encode-half-table = []
+opt-low-memory-hex-str-encode-min-table = [
+    "opt-low-memory-hex-str-encode-half-table",
+]
+tests-slow = []
+maint-code = []
+maint-lints = []
+experiment-pearson = []
+
+[[example]]
+name = "hash-file"
+required-features = ["std", "easy-functions"]
+
+[package.metadata.docs.rs]
+features = ["unstable", "simd-portable", "detect-features", "serde"]

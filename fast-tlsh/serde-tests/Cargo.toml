@@ -1,0 +1,53 @@
+[package]
+name = "fast-tlsh-serde-tests"
+version = "0.1.0"
+license = "Apache-2.0 OR MIT"
+edition = "2021"
+rust-version = "1.70"
+workspace = "../.."
+publish = false
+
+[dependencies]
+fast-tlsh = { path = "..", default-features = false }
+serde = { version = "1.0.197", default-features = false, optional = true }
+
+[dev-dependencies]
+ciborium = "0.2.2"
+postcard = { version = "1.0.8", features = ["alloc", "use-std"] }
+serde_json = "1.0.114"
+
+[features]
+default = ["fast-tlsh/default"]
+strict-parser = ["fast-tlsh/strict-parser"]
+detect-features = ["fast-tlsh/detect-features"]
+std = ["fast-tlsh/std", "serde?/std"]
+alloc = ["fast-tlsh/alloc", "serde?/alloc"]
+easy-functions = ["fast-tlsh/easy-functions"]
+serde = ["fast-tlsh/serde", "dep:serde"]
+serde-buffered = ["fast-tlsh/serde-buffered"]
+simd = ["fast-tlsh/simd"]
+simd-per-arch = ["fast-tlsh/simd-per-arch"]
+simd-portable = ["fast-tlsh/simd-portable"]
+unsafe = ["fast-tlsh/unsafe"]
+unstable = ["fast-tlsh/unstable", "serde?/unstable"]
+opt-default = ["fast-tlsh/opt-default"]
+opt-embedded-default = ["fast-tlsh/opt-embedded-default"]
+opt-simd = ["fast-tlsh/opt-simd"]
+opt-simd-body-comparison = ["fast-tlsh/opt-simd-body-comparison"]
+opt-simd-bucket-aggregation = ["fast-tlsh/opt-simd-bucket-aggregation"]
+opt-simd-parse-hex = ["fast-tlsh/opt-simd-parse-hex"]
+opt-simd-convert-hex = ["fast-tlsh/opt-simd-convert-hex"]
+opt-dist-length-table = ["fast-tlsh/opt-dist-length-table"]
+opt-dist-qratios-table = ["fast-tlsh/opt-dist-qratios-table"]
+opt-dist-qratios-table-double = ["fast-tlsh/opt-dist-qratios-table-double"]
+opt-pearson-table-double = ["fast-tlsh/opt-pearson-table-double"]
+opt-low-memory-buckets = ["fast-tlsh/opt-low-memory-buckets"]
+opt-low-memory-hex-str-decode-half-table = ["fast-tlsh/opt-low-memory-hex-str-decode-half-table"]
+opt-low-memory-hex-str-decode-quarter-table = ["fast-tlsh/opt-low-memory-hex-str-decode-quarter-table"]
+opt-low-memory-hex-str-decode-min-table = ["fast-tlsh/opt-low-memory-hex-str-decode-min-table"]
+opt-low-memory-hex-str-encode-half-table = ["fast-tlsh/opt-low-memory-hex-str-encode-half-table"]
+opt-low-memory-hex-str-encode-min-table = ["fast-tlsh/opt-low-memory-hex-str-encode-min-table"]
+tests-slow = ["fast-tlsh/tests-slow"]
+maint-code = ["fast-tlsh/maint-code"]
+maint-lints = ["fast-tlsh/maint-lints"]
+experiment-pearson = ["fast-tlsh/experiment-pearson"]

@@ -1,0 +1,8 @@
+.*
+!.git?*
+/target
+*.orig
+*.patch
+*.profdata
+*.profraw
+*.rej
