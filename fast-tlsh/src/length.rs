@@ -331,8 +331,9 @@ pub enum DataLengthProcessingMode {
     Optimistic,
     /// The conservative mode.
     ///
-    /// It was the default mode in the past.  While not always true, it
-    /// generates statistically better fuzzy hashes if the generator accepts.
+    /// It was the default mode in the past official implementation.  While not
+    /// always true, it generates statistically better fuzzy hashes if
+    /// the generator accepts.
     Conservative,
 }
 
