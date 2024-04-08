@@ -90,7 +90,7 @@ impl GeneratorOptions {
     /// ```
     /// use tlsh::generate::GeneratorOptions;
     ///
-    /// let options = GeneratorOptions::new();
+    /// let mut options = GeneratorOptions::new();
     /// // By default, the option is compatible to the official implementation.
     /// assert!(options.is_tlsh_compatible());
     /// // By allowing statistically weak hashes, it becomes incompatible with
@@ -134,7 +134,7 @@ impl GeneratorOptions {
     /// let err = result.unwrap_err();
     /// assert_eq!(err.category(), GeneratorErrorCategory::DataLength);
     /// ```
-    pub fn length_processing_mode(mut self, value: DataLengthProcessingMode) -> Self {
+    pub fn length_processing_mode(&mut self, value: DataLengthProcessingMode) -> &mut Self {
         self.length_mode = value;
         self
     }
@@ -172,7 +172,7 @@ impl GeneratorOptions {
     /// let expected = Tlsh::from_str(expected).unwrap();
     /// assert_eq!(hash, expected);
     /// ```
-    pub fn allow_small_size_files(mut self, value: bool) -> Self {
+    pub fn allow_small_size_files(&mut self, value: bool) -> &mut Self {
         self.incompat_flags.set(
             TLSHIncompatibleGeneratorFlags::ALLOW_SMALL_SIZE_FILES,
             value,
@@ -221,7 +221,7 @@ impl GeneratorOptions {
     /// let expected = Tlsh::from_str(expected).unwrap();
     /// assert_eq!(hash.to_string(), expected.to_string());
     /// ```
-    pub fn allow_statistically_weak_buckets_half(mut self, value: bool) -> Self {
+    pub fn allow_statistically_weak_buckets_half(&mut self, value: bool) -> &mut Self {
         self.incompat_flags.set(
             TLSHIncompatibleGeneratorFlags::ALLOW_STATISTICALLY_WEAK_BUCKETS_HALF,
             value,
@@ -274,7 +274,7 @@ impl GeneratorOptions {
     /// let expected = Tlsh::from_str(expected).unwrap();
     /// assert_eq!(hash.to_string(), expected.to_string());
     /// ```
-    pub fn allow_statistically_weak_buckets_quarter(mut self, value: bool) -> Self {
+    pub fn allow_statistically_weak_buckets_quarter(&mut self, value: bool) -> &mut Self {
         self.incompat_flags.set(
             TLSHIncompatibleGeneratorFlags::ALLOW_STATISTICALLY_WEAK_BUCKETS_QUARTER,
             value,
@@ -290,7 +290,7 @@ impl GeneratorOptions {
     /// purely integer-based (involving [`u64`]).
     ///
     /// **Warning**: This is a TLSH-incompatible option.
-    pub fn pure_integer_qratio_computation(mut self, value: bool) -> Self {
+    pub fn pure_integer_qratio_computation(&mut self, value: bool) -> &mut Self {
         self.incompat_flags.set(
             TLSHIncompatibleGeneratorFlags::PURE_INTEGER_QRATIO_COMPUTATION,
             value,
@@ -352,7 +352,7 @@ pub(crate) mod public {
         /// [`finalize()`](Self::finalize()) instead.
         fn finalize_with_options(
             &self,
-            options: GeneratorOptions,
+            options: &GeneratorOptions,
         ) -> Result<Self::Output, GeneratorError>;
 
         /// Finalize the fuzzy hash with the default options.
@@ -362,7 +362,7 @@ pub(crate) mod public {
         /// instead.
         #[inline(always)]
         fn finalize(&self) -> Result<Self::Output, GeneratorError> {
-            self.finalize_with_options(Default::default())
+            self.finalize_with_options(&Default::default())
         }
 
         /// Tests: count non-zero buckets.
@@ -611,7 +611,7 @@ pub(crate) mod inner {
 
         fn finalize_with_options(
             &self,
-            options: GeneratorOptions,
+            options: &GeneratorOptions,
         ) -> Result<Self::Output, GeneratorError> {
             let len = self.processed_len().unwrap_or(u32::MAX); // assume u32::MAX is an invalid value.
             let validity = DataLengthValidity::new::<SIZE_BUCKETS>(len);
@@ -753,7 +753,7 @@ impl<T: ConstrainedFuzzyHashType> GeneratorType for Generator<T> {
     #[inline(always)]
     fn finalize_with_options(
         &self,
-        options: GeneratorOptions,
+        options: &GeneratorOptions,
     ) -> Result<Self::Output, GeneratorError> {
         self.inner.finalize_with_options(options).map(T::new)
     }

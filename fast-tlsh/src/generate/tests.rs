@@ -118,39 +118,37 @@ fn generator_options_compatibility() {
     let options = base_options.clone();
     assert!(options.is_tlsh_compatible());
     // Length processing mode is compatible with the official implementation.
-    let options = base_options
-        .clone()
-        .length_processing_mode(DataLengthProcessingMode::Conservative);
+    let mut options = base_options.clone();
+    let options = options.length_processing_mode(DataLengthProcessingMode::Conservative);
     assert!(options.is_tlsh_compatible());
-    let options = base_options
-        .clone()
-        .length_processing_mode(DataLengthProcessingMode::Optimistic);
+    let mut options = base_options.clone();
+    let options = options.length_processing_mode(DataLengthProcessingMode::Optimistic);
     assert!(options.is_tlsh_compatible());
     // Setting incompatible options to false keeps the compatibility.
-    let options = base_options.clone().allow_small_size_files(false);
+    let mut options = base_options.clone();
+    let options = options.allow_small_size_files(false);
     assert!(options.is_tlsh_compatible());
-    let options = base_options
-        .clone()
-        .allow_statistically_weak_buckets_half(false);
+    let mut options = base_options.clone();
+    let options = options.allow_statistically_weak_buckets_half(false);
     assert!(options.is_tlsh_compatible());
-    let options = base_options
-        .clone()
-        .allow_statistically_weak_buckets_quarter(false);
+    let mut options = base_options.clone();
+    let options = options.allow_statistically_weak_buckets_quarter(false);
     assert!(options.is_tlsh_compatible());
-    let options = base_options.clone().pure_integer_qratio_computation(false);
+    let mut options = base_options.clone();
+    let options = options.pure_integer_qratio_computation(false);
     assert!(options.is_tlsh_compatible());
     // Incompatible with the official implementation:
-    let options = base_options.clone().allow_small_size_files(true);
+    let mut options = base_options.clone();
+    let options = options.allow_small_size_files(true);
     assert!(!options.is_tlsh_compatible());
-    let options = base_options
-        .clone()
-        .allow_statistically_weak_buckets_half(true);
+    let mut options = base_options.clone();
+    let options = options.allow_statistically_weak_buckets_half(true);
     assert!(!options.is_tlsh_compatible());
-    let options = base_options
-        .clone()
-        .allow_statistically_weak_buckets_quarter(true);
+    let mut options = base_options.clone();
+    let options = options.allow_statistically_weak_buckets_quarter(true);
     assert!(!options.is_tlsh_compatible());
-    let options = base_options.clone().pure_integer_qratio_computation(true);
+    let mut options = base_options.clone();
+    let options = options.pure_integer_qratio_computation(true);
     assert!(!options.is_tlsh_compatible());
 }
 
@@ -389,10 +387,11 @@ fn large_data_examples() {
 fn extreme_unbalanced_data_forced_to_finalize() {
     let mut generator = TlshGenerator::new();
     generator.update(BUCKETS_FILLED_32_OF_128);
-    let options = GeneratorOptions::new()
-        .allow_statistically_weak_buckets_quarter(true)
-        .pure_integer_qratio_computation(true);
-    let result = generator.finalize_with_options(options);
+    let result = generator.finalize_with_options(
+        GeneratorOptions::new()
+            .allow_statistically_weak_buckets_quarter(true)
+            .pure_integer_qratio_computation(true),
+    );
     assert_eq!(
         result.unwrap().to_string(),
         "T188904400C0C300300000C00000303C0000000C000300C00C00F30CC03F0C0000C30300"
