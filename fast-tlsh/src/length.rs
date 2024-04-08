@@ -20,7 +20,7 @@ mod private {
     pub trait Sealed {}
 }
 
-/// The number of encoded length values.
+/// The number of valid encoded length values.
 ///
 /// Because the length is encoded as an 8-bit integer, this constant shall be
 /// equal to or less than 2<sup>8</sup> (`256`).
