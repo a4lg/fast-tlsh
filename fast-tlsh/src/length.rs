@@ -340,6 +340,9 @@ pub enum DataLengthProcessingMode {
 impl DataLengthValidity {
     /// Gets the validity value depending on the input data length and
     /// the number of buckets.
+    ///
+    /// The `SIZE_BUCKETS` parameter shall be the one of the bucket size
+    /// constants in [`tlsh::buckets`](crate::buckets).
     pub fn new<const SIZE_BUCKETS: usize>(len: u32) -> DataLengthValidity
     where
         FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper,
