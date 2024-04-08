@@ -142,6 +142,12 @@ where
     pub fn data(&self) -> &[u8; SIZE_CKSUM] {
         &self.data
     }
+
+    /// Clears the checksum.
+    #[inline]
+    pub(crate) fn clear(&mut self) {
+        self.data.fill(0);
+    }
 }
 
 // Normal variant (1-byte checksum)

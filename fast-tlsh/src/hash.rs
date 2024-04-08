@@ -273,6 +273,9 @@ pub(crate) mod public {
         fn compare(&self, other: &Self) -> u32 {
             self.compare_with_config(other, ComparisonConfiguration::Default)
         }
+
+        /// Clear the checksum for comparison with another fuzzy hash without checksum.
+        fn clear_checksum(&mut self);
     }
 }
 
@@ -527,6 +530,10 @@ pub(crate) mod inner {
                     ComparisonConfiguration::Default => self.lvalue.compare(&other.lvalue),
                     ComparisonConfiguration::NoDistance => 0,
                 })
+        }
+
+        fn clear_checksum(&mut self) {
+            self.checksum.clear();
         }
     }
 
@@ -1063,6 +1070,10 @@ where
     #[inline(always)]
     fn compare_with_config(&self, other: &Self, config: ComparisonConfiguration) -> u32 {
         self.inner.compare_with_config(&other.inner, config)
+    }
+    #[inline(always)]
+    fn clear_checksum(&mut self) {
+        self.inner.clear_checksum()
     }
 }
 impl<const SIZE_CKSUM: usize, const SIZE_BUCKETS: usize> Display

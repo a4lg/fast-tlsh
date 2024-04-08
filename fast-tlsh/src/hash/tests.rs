@@ -334,6 +334,22 @@ fn test_compare_with_config() {
 }
 
 #[test]
+fn clear_checksum_modification() {
+    const HASH_STR_1: &str = "T1E16004017D3551777571D55C005CC5";
+    const HASH_STR_2: &str = "T1006004017D3551777571D55C005CC5";
+    type CustomTlsh = hashes::Short;
+    let hash_1 = CustomTlsh::from_str(HASH_STR_1).unwrap();
+    let hash_2 = CustomTlsh::from_str(HASH_STR_2).unwrap();
+    // Because hash2 has cleared checksum, they are different.
+    assert_ne!(hash_1, hash_2);
+    // Clearing the checksum part should succeed on our fuzzy hash type.
+    let mut hash_1 = hash_1;
+    hash_1.clear_checksum();
+    // After clearing the checksum, they should match.
+    assert_eq!(hash_1, hash_2);
+}
+
+#[test]
 fn max_distances() {
     // Compare with pre-computed values.
     assert_eq!(
