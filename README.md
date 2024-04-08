@@ -10,8 +10,8 @@ are significantly faster than the original implementation.  Even if you turn
 off real SIMD (to forbid any unsafe code), it employs pseudo-SIMD operations
 and additional tables to speed up the comparison.
 
-Also, it speeds up generating fuzzy hashes (~50% faster) using "double update"
-table optimization.
+Also, it speeds up generating fuzzy hashes (~50% faster) using the
+"double update" table optimization.
 
 
 ## Crate Features (Major)
@@ -34,7 +34,8 @@ table optimization.
 *   `opt-default` (default; Recommended if no default features are enabled)  
     This crate implements number of optimizations and may be tuned separately.
     If you turn off all default features, all such optimizations are turned off.
-    You may enable this feature for recommended set of optimizations.
+    You may enable this feature for recommended set of optimizations *except*
+    real SIMD-based ones (that are generally unsafe).
 *   `opt-embedded-default` (Turn off the default features if you use this)  
     By default, this crate is optimized for cache-rich environment.
     For embedded devices with a smaller cache memory, you may use this feature
