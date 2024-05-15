@@ -636,10 +636,9 @@ pub(crate) mod inner {
             let buckets: [u32; SIZE_BUCKETS] = self.buckets.data().try_into().unwrap();
             let nonzero_count = buckets.iter().filter(|&&x| x != 0).count();
             let mut copy_buckets = buckets;
-            let (l0, q2, l1) = copy_buckets.select_nth_unstable(SIZE_BUCKETS / 2 - 1);
-            let (_, q1, _) = l0.select_nth_unstable(SIZE_BUCKETS / 4 - 1);
-            let (_, q3, _) = l1.select_nth_unstable(SIZE_BUCKETS / 4 - 1);
-            let (mut q1, mut q2, mut q3) = (*q1, *q2, *q3);
+            let (l0, &mut mut q2, l1) = copy_buckets.select_nth_unstable(SIZE_BUCKETS / 2 - 1);
+            let (_, &mut mut q1, _) = l0.select_nth_unstable(SIZE_BUCKETS / 4 - 1);
+            let (_, &mut mut q3, _) = l1.select_nth_unstable(SIZE_BUCKETS / 4 - 1);
             // Reject if the data distribution is too statistically unbalanced
             // (so that an attempt to calculate Q ratios will cause an issue)
             // unless an option is specified
