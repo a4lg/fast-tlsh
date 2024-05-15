@@ -4,6 +4,7 @@ SIMD-friendly TLSH Body Distance Calculation
 *   Author: Tsukasa OI
 *   Date: 2024-02-16 (original description of the algorithm)
     *   Slightly modified (for this Rust crate): 2024-03-03
+    *   Last mofidication: 2024-04-13
 
 This document describes a SIMD-friendly algorithm for computing distance between
 two TLSH bodies (consisting an array of dibits), the biggest contributor for
@@ -42,6 +43,8 @@ under following conditions:
     *   `*` only allows right hand side constant of `0b11` (`3`).
         *   `x * 0` and `x * 1` are redundant
             and `x * 2` is equivalent to `x << 1`.
+*   Do not count any variable sharing
+    (TODO: redo the search accounting variable sharing).
 
 Under those constraints, this is the optimal solution with the minimum number
 of operations.
