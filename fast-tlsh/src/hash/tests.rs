@@ -328,7 +328,7 @@ fn test_compare_with_config() {
         1
     );
     assert_eq!(
-        hash1.compare_with_config(&hash2, ComparisonConfiguration::NoDistance),
+        hash1.compare_with_config(&hash2, ComparisonConfiguration::NoLength),
         0
     );
 }
@@ -353,7 +353,7 @@ fn clear_checksum_modification() {
 fn max_distances() {
     // Compare with pre-computed values.
     assert_eq!(
-        hashes::Short::max_distance(ComparisonConfiguration::NoDistance),
+        hashes::Short::max_distance(ComparisonConfiguration::NoLength),
         457
     );
     assert_eq!(
@@ -361,7 +361,7 @@ fn max_distances() {
         457 + 1536
     );
     assert_eq!(
-        hashes::Normal::max_distance(ComparisonConfiguration::NoDistance),
+        hashes::Normal::max_distance(ComparisonConfiguration::NoLength),
         937
     );
     assert_eq!(
@@ -369,7 +369,7 @@ fn max_distances() {
         937 + 1536
     );
     assert_eq!(
-        hashes::NormalWithLongChecksum::max_distance(ComparisonConfiguration::NoDistance),
+        hashes::NormalWithLongChecksum::max_distance(ComparisonConfiguration::NoLength),
         939
     );
     assert_eq!(
@@ -377,7 +377,7 @@ fn max_distances() {
         939 + 1536
     );
     assert_eq!(
-        hashes::Long::max_distance(ComparisonConfiguration::NoDistance),
+        hashes::Long::max_distance(ComparisonConfiguration::NoLength),
         1705
     );
     assert_eq!(
@@ -385,7 +385,7 @@ fn max_distances() {
         1705 + 1536
     );
     assert_eq!(
-        hashes::LongWithLongChecksum::max_distance(ComparisonConfiguration::NoDistance),
+        hashes::LongWithLongChecksum::max_distance(ComparisonConfiguration::NoLength),
         1707
     );
     assert_eq!(

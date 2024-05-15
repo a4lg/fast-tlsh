@@ -517,7 +517,7 @@ pub(crate) mod inner {
                 + FuzzyHashQRatios::MAX_DISTANCE
                 + (match config {
                     ComparisonConfiguration::Default => FuzzyHashLengthEncoding::MAX_DISTANCE,
-                    ComparisonConfiguration::NoDistance => 0,
+                    ComparisonConfiguration::NoLength => 0,
                 })
         }
 
@@ -528,7 +528,7 @@ pub(crate) mod inner {
                 + self.qratios.compare(&other.qratios)
                 + (match config {
                     ComparisonConfiguration::Default => self.lvalue.compare(&other.lvalue),
-                    ComparisonConfiguration::NoDistance => 0,
+                    ComparisonConfiguration::NoLength => 0,
                 })
         }
 

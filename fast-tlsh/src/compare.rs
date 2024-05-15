@@ -25,11 +25,10 @@ pub enum ComparisonConfiguration {
     /// In this mode, all checksum, Q ratio pair and body (all *except* the
     /// length encoding) are compared to another.
     ///
-    /// # Deprecation Warning
+    /// # Compatibility Note
     ///
-    /// Due to a heavy error when naming this constant, it will
-    /// renamed to `NoLength`.
-    NoDistance,
+    /// This is renamed from an erroneous name `NoDistance`.
+    NoLength,
 }
 
 mod tests;
