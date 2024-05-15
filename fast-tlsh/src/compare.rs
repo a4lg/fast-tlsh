@@ -20,10 +20,15 @@ pub enum ComparisonConfiguration {
     /// are compared to another.
     #[default]
     Default,
-    /// The no-distance mode.
+    /// The no-length distance mode.
     ///
     /// In this mode, all checksum, Q ratio pair and body (all *except* the
     /// length encoding) are compared to another.
+    ///
+    /// # Deprecation Warning
+    ///
+    /// Due to a heavy error when naming this constant, it will
+    /// renamed to `NoLength`.
     NoDistance,
 }
 
