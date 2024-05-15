@@ -320,9 +320,9 @@ pub(crate) mod public {
         /// If this type is [`false`], the resulting fuzzy hash from this
         /// generator will have checksum part with all zeroes.
         ///
-        /// In the official TLSH implementation, it is effectively [`true`] on
-        /// multi-threaded and private modes.  This crate currently does not
-        /// support those modes but will be implemented in the future.
+        /// In the official TLSH implementation, it is always [`true`]
+        /// except multi-threaded and private modes.  This crate currently
+        /// does not support those modes but will be implemented in the future.
         const IS_CHECKSUM_EFFECTIVE: bool;
 
         /// The minimum data length
