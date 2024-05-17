@@ -4,12 +4,25 @@ SIMD-friendly TLSH Body Distance Calculation
 *   Author: Tsukasa OI
 *   Date: 2024-02-16 (original description of the algorithm)
     *   Slightly modified (for this Rust crate): 2024-03-03
-    *   Last mofidication: 2024-04-13
+    *   Last mofidication: 2024-05-17
 
 This document describes a SIMD-friendly algorithm for computing distance between
 two TLSH bodies (consisting an array of dibits), the biggest contributor for
 fuzzy hash comparison speedups in this crate.  Because this is a small
 bit-slicing algorithm, it can be used even without wide SIMD vectors.
+
+
+Objective to Resolve
+---------------------
+
+The distance between two TLSH bodies can be determined as below:
+
+1.  Split two bodies as arrays of dibit (2-bit) values  
+    (e.g. a TLSH body byte `0x00_01_10_11` → `[0b00, 0b01, 0b10, 0b11]`)
+2.  For each dibit pair (at the same position; `X` and `Y`), compute
+    the sub-distance:  
+    `D := abs(X - Y); D = if D == 3 { 6 } else { D };`
+3.  Take the sum.
 
 
 Expression
