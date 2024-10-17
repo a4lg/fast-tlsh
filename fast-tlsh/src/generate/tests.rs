@@ -150,8 +150,9 @@ fn generator_options_compatibility() {
         .clone()
         .allow_statistically_weak_buckets_quarter(true);
     assert!(!options.is_tlsh_compatible());
+    // Compatible with the official implementation:
     let options = base_options.clone().pure_integer_qratio_computation(true);
-    assert!(!options.is_tlsh_compatible());
+    assert!(options.is_tlsh_compatible());
 }
 
 #[test]
