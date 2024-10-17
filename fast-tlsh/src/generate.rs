@@ -38,6 +38,14 @@ pub(crate) mod bucket_aggregation;
 pub const WINDOW_SIZE: usize = 5;
 
 bitflags::bitflags! {
+    /// TLSH-compatible generator option flags.
+    #[derive(Debug, Clone, PartialEq, Eq)]
+    struct TLSHCompatibleGeneratorFlags: u8 {
+        /// If set, the generator computes Q ratio values using only
+        /// integers (unlike f32 as in the original implementation).
+        const PURE_INTEGER_QRATIO_COMPUTATION = 0x01;
+    }
+
     /// TLSH-incompatible generator option flags.
     #[derive(Debug, Clone, PartialEq, Eq)]
     struct TLSHIncompatibleGeneratorFlags: u8 {
@@ -53,9 +61,6 @@ bitflags::bitflags! {
         /// If set, it allows statistically weak buckets
         /// (approximately 3/4 or more are empty).
         const ALLOW_STATISTICALLY_WEAK_BUCKETS_QUARTER = 0x04;
-        /// If set, the generator computes Q ratio values using only
-        /// integers (unlike f32 as in the original implementation).
-        const PURE_INTEGER_QRATIO_COMPUTATION          = 0x08;
     }
 }
 
@@ -64,6 +69,8 @@ bitflags::bitflags! {
 pub struct GeneratorOptions {
     /// Current processing mode of the data length.
     length_mode: DataLengthProcessingMode,
+    /// Flags indicating TLSH-compatible flags.
+    compat_flags: TLSHCompatibleGeneratorFlags,
     /// Flags indicating TLSH-incompatible flags.
     incompat_flags: TLSHIncompatibleGeneratorFlags,
 }
@@ -73,6 +80,7 @@ impl GeneratorOptions {
     pub fn new() -> Self {
         Self {
             length_mode: Default::default(),
+            compat_flags: TLSHCompatibleGeneratorFlags::empty(),
             incompat_flags: TLSHIncompatibleGeneratorFlags::empty(),
         }
     }
@@ -136,6 +144,28 @@ impl GeneratorOptions {
     /// ```
     pub fn length_processing_mode(&mut self, value: DataLengthProcessingMode) -> &mut Self {
         self.length_mode = value;
+        self
+    }
+
+    /// Set whether we compute Q ratio values by pure integers.
+    ///
+    /// The official implementation (up to version 4.12.0) effectively uses
+    /// [`f32`] for computing Q ratio values.  Enabling this option will make
+    /// this computation purely integer-based (involving [`u64`]).
+    ///
+    /// This is [`true`] by default.
+    ///
+    /// # Compatibility
+    ///
+    /// The Q ratio computation algorithm is equivalent to following versions:
+    ///
+    /// *   [`true`] (default): TLSH 4.12.1+
+    /// *   [`false`]: TLSH -4.12.0
+    pub fn pure_integer_qratio_computation(&mut self, value: bool) -> &mut Self {
+        self.compat_flags.set(
+            TLSHCompatibleGeneratorFlags::PURE_INTEGER_QRATIO_COMPUTATION,
+            value,
+        );
         self
     }
 
@@ -277,22 +307,6 @@ impl GeneratorOptions {
     pub fn allow_statistically_weak_buckets_quarter(&mut self, value: bool) -> &mut Self {
         self.incompat_flags.set(
             TLSHIncompatibleGeneratorFlags::ALLOW_STATISTICALLY_WEAK_BUCKETS_QUARTER,
-            value,
-        );
-        self
-    }
-
-    /// (fast-tlsh specific)
-    /// Set whether we compute Q ratio values by pure integers.
-    ///
-    /// The official implementation effectively uses [`f32`] for computing
-    /// Q ratio values.  Enabling this option will make this computation
-    /// purely integer-based (involving [`u64`]).
-    ///
-    /// **Warning**: This is a TLSH-incompatible option.
-    pub fn pure_integer_qratio_computation(&mut self, value: bool) -> &mut Self {
-        self.incompat_flags.set(
-            TLSHIncompatibleGeneratorFlags::PURE_INTEGER_QRATIO_COMPUTATION,
             value,
         );
         self
@@ -664,8 +678,8 @@ pub(crate) mod inner {
             }
             // Get the Q ratios.
             let (q1ratio, q2ratio) = if options
-                .incompat_flags
-                .contains(TLSHIncompatibleGeneratorFlags::PURE_INTEGER_QRATIO_COMPUTATION)
+                .compat_flags
+                .contains(TLSHCompatibleGeneratorFlags::PURE_INTEGER_QRATIO_COMPUTATION)
             {
                 (
                     (((q1 as u64 * 100) / q3 as u64) % 16) as u8,

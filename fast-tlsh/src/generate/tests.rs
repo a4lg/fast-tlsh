@@ -147,9 +147,10 @@ fn generator_options_compatibility() {
     let mut options = base_options.clone();
     let options = options.allow_statistically_weak_buckets_quarter(true);
     assert!(!options.is_tlsh_compatible());
+    // Compatible with the official implementation:
     let mut options = base_options.clone();
     let options = options.pure_integer_qratio_computation(true);
-    assert!(!options.is_tlsh_compatible());
+    assert!(options.is_tlsh_compatible());
 }
 
 #[test]
