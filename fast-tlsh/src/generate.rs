@@ -282,8 +282,8 @@ impl GeneratorOptions {
     /// let mut generator = TlshGenerator::new();
     ///
     /// // With default options or only half-bucket empty data is accepted,
-    /// // this data (50 bytes) generates statistically weaker hash(
-    /// // and thus rejected by default).
+    /// // this data (50 bytes) generates statistically weaker hash
+    /// // (and thus rejected by default).
     /// // This is even stronger failure than a half-empty buckets.
     /// // The failure is caused by an *extremely* unbalanced data distribution.
     /// generator.update(b"ABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE");
