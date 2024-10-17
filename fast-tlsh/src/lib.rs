@@ -55,6 +55,8 @@
 #![cfg_attr(test, allow(clippy::nonminimal_bool))]
 // Tests: assertion on constants should be allowed.
 #![cfg_attr(test, allow(clippy::assertions_on_constants))]
+// Tests: redundant clones should be allowed.
+#![cfg_attr(test, allow(clippy::redundant_clone))]
 
 // alloc is required when the "alloc" feature is enabled or testing (including doctests).
 #[cfg(any(feature = "alloc", test, doc))]

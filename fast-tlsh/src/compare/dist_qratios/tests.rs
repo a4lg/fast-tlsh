@@ -30,6 +30,7 @@ fn arithmetic_correctness_naive() {
     feature = "opt-dist-qratios-table",
     not(feature = "opt-dist-qratios-table-double")
 ))]
+#[allow(clippy::useless_conversion)]
 #[test]
 fn table_consistency()
 where
@@ -46,6 +47,7 @@ where
 }
 
 #[cfg(feature = "opt-dist-qratios-table-double")]
+#[allow(clippy::useless_conversion)]
 #[test]
 fn table_consistency_double()
 where

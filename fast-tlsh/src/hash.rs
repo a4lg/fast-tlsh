@@ -757,13 +757,12 @@ pub(crate) mod inner {
 
     #[cfg(feature = "serde")]
     impl<
-            'de,
             const SIZE_CKSUM: usize,
             const SIZE_BODY: usize,
             const SIZE_BUCKETS: usize,
             const SIZE_IN_BYTES: usize,
             const SIZE_IN_STR_BYTES: usize,
-        > Visitor<'de>
+        > Visitor<'_>
         for FuzzyHashStringVisitor<
             SIZE_CKSUM,
             SIZE_BODY,
@@ -835,13 +834,12 @@ pub(crate) mod inner {
 
     #[cfg(feature = "serde")]
     impl<
-            'de,
             const SIZE_CKSUM: usize,
             const SIZE_BODY: usize,
             const SIZE_BUCKETS: usize,
             const SIZE_IN_BYTES: usize,
             const SIZE_IN_STR_BYTES: usize,
-        > Visitor<'de>
+        > Visitor<'_>
         for FuzzyHashBytesVisitor<
             SIZE_CKSUM,
             SIZE_BODY,
