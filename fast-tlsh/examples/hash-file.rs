@@ -1,7 +1,7 @@
 use std::env;
 
-use tlsh::GeneratorOrIOError;
 use tlsh::FuzzyHashType;
+use tlsh::GeneratorOrIOError;
 
 fn main() {
     type TlshType = tlsh::hashes::Normal;
