@@ -76,7 +76,14 @@ pub const SUBST_TABLE: [u8; 256] = [
 /// Note that the first index denotes the byte 2 (not 1) to maximize
 /// address calculation efficiency.
 #[cfg(any(doc, feature = "opt-pearson-table-double"))]
+#[allow(clippy::large_const_arrays)]
 const SUBST_TABLE_DOUBLE: [[u8; 256]; 256] = {
+    // TODO:
+    // Since making this table static now is a breaking change,
+    // do following on the next major version:
+    //  1.  Remove #[allow] above
+    //  2.  Remove `const` from `update_double()` function below and
+    //  3.  Make this item `static` rather than `const`.
     let mut array = [[0; 256]; 256];
     let mut b2 = 0;
     while b2 < 256 {
@@ -281,7 +288,7 @@ pub const fn final_48(state: u8, value: u8) -> u8 {
 /// # }
 /// ```
 #[inline(always)]
-pub const fn tlsh_b_mapping_256(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
+pub fn tlsh_b_mapping_256(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
     final_256(update_double(init(b0), b1, b2), b3)
 }
 
@@ -315,7 +322,7 @@ pub const fn tlsh_b_mapping_256(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
 /// # }
 /// ```
 #[inline(always)]
-pub const fn tlsh_b_mapping_48(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
+pub fn tlsh_b_mapping_48(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
     final_48(update_double(init(b0), b1, b2), b3)
 }
 

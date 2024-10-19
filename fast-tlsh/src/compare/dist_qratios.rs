@@ -77,7 +77,7 @@ type QRatiosDistanceTableType2 = u8;
 ///
 /// The type of elements in this table is [`QRatiosDistanceTableType2`].
 #[cfg(any(doc, feature = "opt-dist-qratios-table-double"))]
-const QDIST_VALUE_2: [[QRatiosDistanceTableType2; 256]; 256] = {
+static QDIST_VALUE_2: [[QRatiosDistanceTableType2; 256]; 256] = {
     let mut array = [[0; 256]; 256];
     let mut yi = 0;
     while yi < 256 {
@@ -98,7 +98,7 @@ const QDIST_VALUE_2: [[QRatiosDistanceTableType2; 256]; 256] = {
 /// Each `qratios` is composed of two Q ratio values (4-bits each) and the sum
 /// of the distances of Q ratio values with the same position.
 #[inline]
-pub const fn distance(qratios1: u8, qratios2: u8) -> u32 {
+pub fn distance(qratios1: u8, qratios2: u8) -> u32 {
     cfg_if::cfg_if! {
         if #[cfg(feature = "opt-dist-qratios-table-double")] {
             QDIST_VALUE_2[qratios1 as usize][qratios2 as usize] as u32
