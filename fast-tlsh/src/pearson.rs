@@ -74,7 +74,7 @@ pub const SUBST_TABLE: [u8; 256] = [
 /// Note that the first index denotes the byte 2 (not 1) to maximize
 /// address calculation efficiency.
 #[cfg(any(doc, feature = "opt-pearson-table-double"))]
-const SUBST_TABLE_DOUBLE: [[u8; 256]; 256] = {
+static SUBST_TABLE_DOUBLE: [[u8; 256]; 256] = {
     let mut array = [[0; 256]; 256];
     let mut b2 = 0;
     while b2 < 256 {
@@ -136,7 +136,7 @@ pub const fn update(state: u8, value: u8) -> u8 {
 /// This is equivalent to two calls to [`update()`] but may be optimized
 /// for faster processing.
 #[inline(always)]
-pub const fn update_double(state: u8, b1: u8, b2: u8) -> u8 {
+pub fn update_double(state: u8, b1: u8, b2: u8) -> u8 {
     cfg_if::cfg_if! {
         if #[cfg(feature = "opt-pearson-table-double")] {
             SUBST_TABLE_DOUBLE[b2 as usize][(state ^ b1) as usize]
@@ -183,7 +183,7 @@ pub const fn final_48(state: u8, value: u8) -> u8 {
 /// On the 256-bucket variant, this is the same as updating 4 bytes: `b0`
 /// through `b3` (in that order) from the initial state.
 #[inline(always)]
-pub const fn tlsh_b_mapping_256(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
+pub fn tlsh_b_mapping_256(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
     final_256(update_double(init(b0), b1, b2), b3)
 }
 
@@ -206,7 +206,7 @@ pub const fn tlsh_b_mapping_256(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
 /// `48` will get intermediate frequency of `5/256` but `48` gets `16/256`;
 /// `256 / 48 == 5`, `256 - 256 / 48 * 48 == 16`).
 #[inline(always)]
-pub const fn tlsh_b_mapping_48(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
+pub fn tlsh_b_mapping_48(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
     final_48(update_double(init(b0), b1, b2), b3)
 }
 
