@@ -38,6 +38,7 @@ impl Display for ParseError {
     }
 }
 #[cfg(feature = "std")]
+#[cfg_attr(feature = "unstable", doc(cfg(all())))]
 impl std::error::Error for ParseError {}
 #[cfg(all(not(feature = "std"), fast_tlsh_error_in_core = "stable"))]
 impl core::error::Error for ParseError {}
@@ -60,6 +61,7 @@ impl Display for OperationError {
     }
 }
 #[cfg(feature = "std")]
+#[cfg_attr(feature = "unstable", doc(cfg(all())))]
 impl std::error::Error for OperationError {}
 #[cfg(all(not(feature = "std"), fast_tlsh_error_in_core = "stable"))]
 impl core::error::Error for OperationError {}
@@ -130,6 +132,7 @@ impl Display for GeneratorError {
     }
 }
 #[cfg(feature = "std")]
+#[cfg_attr(feature = "unstable", doc(cfg(all())))]
 impl std::error::Error for GeneratorError {}
 #[cfg(all(not(feature = "std"), fast_tlsh_error_in_core = "stable"))]
 impl core::error::Error for GeneratorError {}
@@ -176,6 +179,7 @@ impl Display for ParseErrorEither {
     }
 }
 #[cfg(all(feature = "easy-functions", feature = "std"))]
+#[cfg_attr(feature = "unstable", doc(cfg(all())))]
 impl std::error::Error for ParseErrorEither {}
 #[cfg(all(feature = "easy-functions", not(feature = "std"), fast_tlsh_error_in_core = "stable"))]
 impl core::error::Error for ParseErrorEither {}
