@@ -119,8 +119,7 @@ impl GeneratorOptions {
     /// ```
     /// use core::str::FromStr;
     /// use tlsh::prelude::*;
-    /// use tlsh::errors::GeneratorErrorCategory;
-    /// use tlsh::generate::GeneratorOptions;
+    /// use tlsh::{GeneratorErrorCategory, GeneratorOptions};
     /// use tlsh::length::DataLengthProcessingMode;
     ///
     /// let mut generator = TlshGenerator::new();
@@ -179,8 +178,7 @@ impl GeneratorOptions {
     /// ```
     /// use core::str::FromStr;
     /// use tlsh::prelude::*;
-    /// use tlsh::errors::GeneratorErrorCategory;
-    /// use tlsh::generate::GeneratorOptions;
+    /// use tlsh::{GeneratorErrorCategory, GeneratorOptions};
     ///
     /// let mut generator = TlshGenerator::new();
     ///
@@ -227,8 +225,7 @@ impl GeneratorOptions {
     /// ```
     /// use core::str::FromStr;
     /// use tlsh::prelude::*;
-    /// use tlsh::errors::GeneratorErrorCategory;
-    /// use tlsh::generate::GeneratorOptions;
+    /// use tlsh::{GeneratorErrorCategory, GeneratorOptions};
     ///
     /// let mut generator = TlshGenerator::new();
     ///
@@ -276,8 +273,7 @@ impl GeneratorOptions {
     /// ```
     /// use core::str::FromStr;
     /// use tlsh::prelude::*;
-    /// use tlsh::errors::GeneratorErrorCategory;
-    /// use tlsh::generate::GeneratorOptions;
+    /// use tlsh::{GeneratorErrorCategory, GeneratorOptions};
     ///
     /// let mut generator = TlshGenerator::new();
     ///

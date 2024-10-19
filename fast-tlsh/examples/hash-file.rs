@@ -1,6 +1,6 @@
 use std::env;
 
-use tlsh::errors::GeneratorOrIOError;
+use tlsh::GeneratorOrIOError;
 use tlsh::FuzzyHashType;
 
 fn main() {

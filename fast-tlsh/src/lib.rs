@@ -63,9 +63,9 @@ extern crate alloc;
 
 pub mod _docs;
 pub mod buckets;
-pub mod compare;
+mod compare;
 mod compare_easy;
-pub mod errors;
+mod errors;
 pub mod generate;
 mod generate_easy;
 mod generate_easy_std;
@@ -89,6 +89,18 @@ pub use generate_easy_std::{hash_file, hash_file_for, hash_stream, hash_stream_f
 // Trait re-exports
 pub use generate::public::GeneratorType;
 pub use hash::public::FuzzyHashType;
+
+// Type re-exports
+pub use compare::ComparisonConfiguration;
+pub use errors::{GeneratorError, GeneratorErrorCategory};
+pub use errors::{OperationError, ParseError};
+pub use generate::GeneratorOptions;
+pub use hash::HexStringPrefix;
+
+#[cfg(all(feature = "easy-functions", feature = "std"))]
+pub use errors::GeneratorOrIOError;
+#[cfg(feature = "easy-functions")]
+pub use errors::{ParseErrorEither, ParseErrorSide};
 
 /// The default fuzzy hash type.
 pub type Tlsh = hashes::Normal;
@@ -122,7 +134,7 @@ pub type TlshGeneratorFor<T> = generate::Generator<T>;
 
 /// The recommended set (prelude) to import.
 ///
-/// It contains all crate-root types, traits and type aliases
+/// It provides a subset of crate-root types, traits and type aliases
 /// suitable for using this crate.  Because some methods require importing
 /// certain traits, just importing this can be convenient (not to confuse
 /// beginners, those traits are imported as `_`).

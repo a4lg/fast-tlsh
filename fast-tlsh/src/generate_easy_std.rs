@@ -56,7 +56,7 @@ fn hash_stream_common<R: Read, G: GeneratorType>(
 ///
 /// type CustomTlsh = tlsh::hashes::Short;
 ///
-/// fn main() -> Result<(), tlsh::errors::GeneratorOrIOError> {
+/// fn main() -> Result<(), tlsh::GeneratorOrIOError> {
 ///     let mut stream = File::open("data/examples/smallexe.exe")?;
 ///     let fuzzy_hash: CustomTlsh = tlsh::hash_stream_for(&mut stream)?;
 ///     let fuzzy_hash_str = fuzzy_hash.to_string();
@@ -78,7 +78,7 @@ pub fn hash_stream_for<T: ConstrainedFuzzyHashType, R: Read>(
 /// ```
 /// use std::fs::File;
 ///
-/// fn main() -> Result<(), tlsh::errors::GeneratorOrIOError> {
+/// fn main() -> Result<(), tlsh::GeneratorOrIOError> {
 ///     let mut stream = File::open("data/examples/smallexe.exe")?;
 ///     let fuzzy_hash = tlsh::hash_stream(&mut stream)?;
 ///     let fuzzy_hash_str = fuzzy_hash.to_string();
@@ -98,7 +98,7 @@ pub fn hash_stream<R: Read>(reader: &mut R) -> Result<Tlsh, GeneratorOrIOError> 
 /// ```
 /// type CustomTlsh = tlsh::hashes::Short;
 ///
-/// fn main() -> Result<(), tlsh::errors::GeneratorOrIOError> {
+/// fn main() -> Result<(), tlsh::GeneratorOrIOError> {
 ///     let fuzzy_hash: CustomTlsh = tlsh::hash_file_for("data/examples/smallexe.exe")?;
 ///     let fuzzy_hash_str = fuzzy_hash.to_string();
 ///     assert_eq!(fuzzy_hash_str, "T140E0483A5DFC1B073D86A4A2C55A43");
@@ -118,7 +118,7 @@ pub fn hash_file_for<T: ConstrainedFuzzyHashType, P: AsRef<Path>>(
 /// # Example
 ///
 /// ```
-/// fn main() -> Result<(), tlsh::errors::GeneratorOrIOError> {
+/// fn main() -> Result<(), tlsh::GeneratorOrIOError> {
 ///     let fuzzy_hash = tlsh::hash_file("data/examples/smallexe.exe")?;
 ///     let fuzzy_hash_str = fuzzy_hash.to_string();
 ///     assert_eq!(fuzzy_hash_str, "T1FFE04C037F895471D42E5530499E47473757E5E456D28B13ED1944654C8534C7CE9E01");

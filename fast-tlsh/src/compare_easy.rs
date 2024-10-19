@@ -30,7 +30,7 @@ use crate::Tlsh;
 /// ```
 ///
 /// ```
-/// use tlsh::errors::{ParseError, ParseErrorEither, ParseErrorSide};
+/// use tlsh::{ParseError, ParseErrorEither, ParseErrorSide};
 ///
 /// type CustomTlsh = tlsh::hashes::Short;
 ///
@@ -80,7 +80,7 @@ pub fn compare_with<T: ConstrainedFuzzyHashType>(
 /// ```
 ///
 /// ```
-/// use tlsh::errors::{ParseError, ParseErrorEither, ParseErrorSide};
+/// use tlsh::{ParseError, ParseErrorEither, ParseErrorSide};
 ///
 /// // The parser fails on the right.
 /// let result = tlsh::compare(
