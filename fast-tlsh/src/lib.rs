@@ -12,7 +12,6 @@
 #![cfg_attr(feature = "unstable", feature(doc_auto_cfg))]
 #![cfg_attr(feature = "unstable", feature(core_intrinsics))]
 #![cfg_attr(feature = "unstable", feature(coverage_attribute))]
-#![cfg_attr(feature = "unstable", feature(error_in_core))]
 #![cfg_attr(feature = "unstable", feature(portable_simd))]
 #![cfg_attr(
     all(feature = "unstable", target_arch = "arm"),
