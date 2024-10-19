@@ -39,7 +39,7 @@ impl Display for ParseError {
 }
 #[cfg(feature = "std")]
 impl std::error::Error for ParseError {}
-#[cfg(all(not(feature = "std"), feature = "unstable"))]
+#[cfg(all(not(feature = "std"), fast_tlsh_error_in_core = "stable"))]
 impl core::error::Error for ParseError {}
 
 /// An error type representing an error (generally) while processing a fuzzy hash.
@@ -61,7 +61,7 @@ impl Display for OperationError {
 }
 #[cfg(feature = "std")]
 impl std::error::Error for OperationError {}
-#[cfg(all(not(feature = "std"), feature = "unstable"))]
+#[cfg(all(not(feature = "std"), fast_tlsh_error_in_core = "stable"))]
 impl core::error::Error for OperationError {}
 
 /// An error category type for [a generator error](GeneratorError).
@@ -131,7 +131,7 @@ impl Display for GeneratorError {
 }
 #[cfg(feature = "std")]
 impl std::error::Error for GeneratorError {}
-#[cfg(all(not(feature = "std"), feature = "unstable"))]
+#[cfg(all(not(feature = "std"), fast_tlsh_error_in_core = "stable"))]
 impl core::error::Error for GeneratorError {}
 
 /// The operand (side) which caused a parse error.
@@ -177,7 +177,7 @@ impl Display for ParseErrorEither {
 }
 #[cfg(all(feature = "easy-functions", feature = "std"))]
 impl std::error::Error for ParseErrorEither {}
-#[cfg(all(feature = "easy-functions", not(feature = "std"), feature = "unstable"))]
+#[cfg(all(feature = "easy-functions", not(feature = "std"), fast_tlsh_error_in_core = "stable"))]
 impl core::error::Error for ParseErrorEither {}
 
 /// The error type describing either a generator error or an I/O error.
