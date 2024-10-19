@@ -96,6 +96,7 @@ pub use errors::{GeneratorError, GeneratorErrorCategory};
 pub use errors::{OperationError, ParseError};
 pub use generate::GeneratorOptions;
 pub use hash::HexStringPrefix;
+pub use length::DataLengthProcessingMode;
 
 #[cfg(all(feature = "easy-functions", feature = "std"))]
 pub use errors::GeneratorOrIOError;
