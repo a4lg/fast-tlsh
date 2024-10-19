@@ -76,11 +76,7 @@ pub mod length;
 mod macros;
 mod params;
 mod parse;
-#[cfg(not(any(doc, feature = "experiment-pearson")))]
 mod pearson;
-#[cfg(any(doc, feature = "experiment-pearson"))]
-#[cfg_attr(feature = "unstable", doc(cfg(feature = "experiment-pearson")))]
-pub mod pearson;
 
 // Easy function re-exports
 #[cfg(feature = "easy-functions")]

@@ -3,6 +3,8 @@
 
 //! Pearson hashing and the TLSH's B (bucket) mapping.
 //!
+//! # Summary
+//!
 //! See [Pearson, 1990 (doi:10.1145/78973.78978)](https://doi.org/10.1145%2F78973.78978)
 //! and the [Wikipedia article](https://en.wikipedia.org/wiki/Pearson_hashing)
 //! for details.
@@ -35,8 +37,6 @@
 //! fast_b_mapping(49,  a4, a3, a2)
 //! // fast-tlsh (this crate; internal)
 //! final_256(update_double(init(0x02), a4, a3), a2)
-//! // fast-tlsh (this crate; public)
-//! pearson::tlsh_b_mapping_256(0x02, a4, a3, a2)
 //! ```
 //!
 //! On short fuzzy hashes:
@@ -44,8 +44,6 @@
 //! ```text
 //! // fast-tlsh (this crate; internal)
 //! final_48(update_double(init(0x02), a4, a3), a2)
-//! // fast-tlsh (this crate; public)
-//! pearson::tlsh_b_mapping_48(0x02, a4, a3, a2)
 //! ```
 
 /// The initial state of Pearson hashing.
@@ -119,55 +117,12 @@ const SUBST_TABLE_48: [u8; 256] = {
 };
 
 /// Process one byte (as a initialization) using Pearson hashing.
-///
-/// # Example
-///
-/// ```
-/// // Requires the `experiment-pearson` feature.
-/// # #[cfg(feature = "experiment-pearson")] {
-/// use tlsh::pearson;
-///
-/// let state = pearson::init(0x02);
-/// assert_eq!(state, 0x31);
-/// # }
-/// ```
 #[inline(always)]
 pub const fn init(value: u8) -> u8 {
     update(INITIAL_STATE, value)
 }
 
 /// Process one byte using Pearson hashing.
-///
-/// # Examples
-///
-/// ## Usage
-///
-/// ```
-/// // Requires the `experiment-pearson` feature.
-/// # #[cfg(feature = "experiment-pearson")] {
-/// use tlsh::pearson;
-///
-/// let state = pearson::init(0x02);
-/// let state = pearson::update(state, 0xbe);
-/// let state = pearson::update(state, 0xef);
-/// assert_eq!(state, 0x63);
-/// # }
-/// ```
-///
-/// ## Relation with [`init()`]
-///
-/// ```
-/// // Requires the `experiment-pearson` feature.
-/// # #[cfg(feature = "experiment-pearson")] {
-/// use tlsh::pearson;
-///
-/// // init() is equivalent to updating 1 byte from the initial state.
-/// let state1 = pearson::init(0x02);
-/// let state2 = pearson::INITIAL_STATE;
-/// let state2 = pearson::update(state2, 0x02);
-/// assert_eq!(state1, state2);
-/// # }
-/// ```
 #[inline(always)]
 pub const fn update(state: u8, value: u8) -> u8 {
     SUBST_TABLE[(state ^ value) as usize]
@@ -180,20 +135,6 @@ pub const fn update(state: u8, value: u8) -> u8 {
 ///
 /// This is equivalent to two calls to [`update()`] but may be optimized
 /// for faster processing.
-///
-/// # Example
-///
-/// ```
-/// // Requires the `experiment-pearson` feature.
-/// # #[cfg(feature = "experiment-pearson")] {
-/// use tlsh::pearson;
-///
-/// let state = pearson::init(0x02);
-/// let state1 = pearson::update(pearson::update(state, 0xbe), 0xef);
-/// let state2 = pearson::update_double(state, 0xbe, 0xef);
-/// assert_eq!(state1, state2);
-/// # }
-/// ```
 #[inline(always)]
 pub const fn update_double(state: u8, b1: u8, b2: u8) -> u8 {
     cfg_if::cfg_if! {
@@ -209,20 +150,6 @@ pub const fn update_double(state: u8, b1: u8, b2: u8) -> u8 {
 /// Process one byte using Pearson hashing for 256-bucket finalization.
 ///
 /// On the 256-bucket variant, this is the same as regular [`update()`].
-///
-/// # Example
-///
-/// ```
-/// // Requires the `experiment-pearson` feature.
-/// # #[cfg(feature = "experiment-pearson")] {
-/// use tlsh::pearson;
-///
-/// let state = pearson::init(0x02);
-/// let state = pearson::update_double(state, 0xbe, 0xef);
-/// let state = pearson::final_256(state, 0x00);
-/// assert_eq!(state, 0x4b);
-/// # }
-/// ```
 #[inline(always)]
 pub const fn final_256(state: u8, value: u8) -> u8 {
     update(state, value)
@@ -243,20 +170,6 @@ pub const fn final_256(state: u8, value: u8) -> u8 {
 /// Instead, it increases the bias on the checksum (because values other than
 /// `48` will get intermediate frequency of `5/256` but `48` gets `16/256`;
 /// `256 / 48 == 5`, `256 - 256 / 48 * 48 == 16`).
-///
-/// # Example
-///
-/// ```
-/// // Requires the `experiment-pearson` feature.
-/// # #[cfg(feature = "experiment-pearson")] {
-/// use tlsh::pearson;
-///
-/// let state = pearson::init(0x02);
-/// let state = pearson::update_double(state, 0xbe, 0xef);
-/// let state = pearson::final_48(state, 0x00);
-/// assert_eq!(state, 0x1b);
-/// # }
-/// ```
 #[inline(always)]
 pub const fn final_48(state: u8, value: u8) -> u8 {
     SUBST_TABLE_48[(state ^ value) as usize]
@@ -269,17 +182,6 @@ pub const fn final_48(state: u8, value: u8) -> u8 {
 ///
 /// On the 256-bucket variant, this is the same as updating 4 bytes: `b0`
 /// through `b3` (in that order) from the initial state.
-///
-/// # Example
-///
-/// ```
-/// // Requires the `experiment-pearson` feature.
-/// # #[cfg(feature = "experiment-pearson")] {
-/// use tlsh::pearson;
-///
-/// assert_eq!(pearson::tlsh_b_mapping_256(0x02, 0xbe, 0xef, 0x00), 0x4b);
-/// # }
-/// ```
 #[inline(always)]
 pub const fn tlsh_b_mapping_256(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
     final_256(update_double(init(b0), b1, b2), b3)
@@ -303,17 +205,6 @@ pub const fn tlsh_b_mapping_256(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
 /// Instead, it increases the bias on the checksum (because values other than
 /// `48` will get intermediate frequency of `5/256` but `48` gets `16/256`;
 /// `256 / 48 == 5`, `256 - 256 / 48 * 48 == 16`).
-///
-/// # Example
-///
-/// ```
-/// // Requires the `experiment-pearson` feature.
-/// # #[cfg(feature = "experiment-pearson")] {
-/// use tlsh::pearson;
-///
-/// assert_eq!(pearson::tlsh_b_mapping_48(0x02, 0xbe, 0xef, 0x00), 0x1b);
-/// # }
-/// ```
 #[inline(always)]
 pub const fn tlsh_b_mapping_48(b0: u8, b1: u8, b2: u8, b3: u8) -> u8 {
     final_48(update_double(init(b0), b1, b2), b3)

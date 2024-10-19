@@ -23,6 +23,14 @@ fn init_and_update_equivalence() {
 }
 
 #[test]
+fn update_sample() {
+    let state = init(0x02);
+    let state = update(state, 0xbe);
+    let state = update(state, 0xef);
+    assert_eq!(state, 0x63);
+}
+
+#[test]
 fn update_double_equivalence() {
     for salt in u8::MIN..=u8::MAX {
         for b1 in u8::MIN..=u8::MAX {

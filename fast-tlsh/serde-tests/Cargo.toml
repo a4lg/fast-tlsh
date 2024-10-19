@@ -50,4 +50,3 @@ opt-low-memory-hex-str-encode-min-table = ["fast-tlsh/opt-low-memory-hex-str-enc
 tests-slow = ["fast-tlsh/tests-slow"]
 maint-code = ["fast-tlsh/maint-code"]
 maint-lints = ["fast-tlsh/maint-lints"]
-experiment-pearson = ["fast-tlsh/experiment-pearson"]

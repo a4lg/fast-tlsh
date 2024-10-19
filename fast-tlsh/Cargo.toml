@@ -93,7 +93,6 @@ opt-low-memory-hex-str-encode-min-table = [
 tests-slow = []
 maint-code = []
 maint-lints = []
-experiment-pearson = []
 
 [[example]]
 name = "hash-file"

@@ -98,8 +98,8 @@ pub(crate) mod public {
         /// buckets that are used to construct a fuzzy hash.
         ///
         /// Sometimes, the number of physical buckets (number of possible
-        /// results after [the Pearson hashing](crate::pearson) or its variant)
-        /// differs from the number of effective buckets.
+        /// results after the Pearson hashing or its variant) differs
+        /// from the number of effective buckets.
         ///
         /// | Variant | Effective Buckets | Physical Buckets |
         /// | ------- | -----------------:| ----------------:|

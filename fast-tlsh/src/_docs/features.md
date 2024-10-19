@@ -36,10 +36,6 @@
         But enabling this feature may improve robustness on certain formats.
         For instance, CBOR deserialization using Ciborium with `serde-buffered`
         makes possible to decode indefinite-length bytes with multiple chunks.
-*   `experiment-pearson`  
-    Enabling it exposes the internal Pearson hashing and TLSH B (bucket) mapping
-    functions.  It may help users fiddling with TLSH internals but otherwise
-    not needed.
 
 ## More Unsafe Features
 
