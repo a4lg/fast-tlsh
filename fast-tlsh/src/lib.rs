@@ -80,6 +80,7 @@ mod parse;
 mod pearson;
 #[cfg(any(doc, feature = "experiment-pearson"))]
 #[cfg_attr(feature = "unstable", doc(cfg(feature = "experiment-pearson")))]
+#[cfg_attr(doc, deprecated)]
 pub mod pearson;
 
 // Easy function re-exports

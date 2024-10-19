@@ -3,6 +3,12 @@
 
 //! Pearson hashing and the TLSH's B (bucket) mapping.
 //!
+//! # Warning
+//!
+//! This module is going to be private on the next major version.
+//!
+//! # Summary
+//!
 //! See [Pearson, 1990 (doi:10.1145/78973.78978)](https://doi.org/10.1145%2F78973.78978)
 //! and the [Wikipedia article](https://en.wikipedia.org/wiki/Pearson_hashing)
 //! for details.
