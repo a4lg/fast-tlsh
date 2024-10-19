@@ -1,6 +1,6 @@
 [package]
 name = "fast-tlsh"
-version = "0.2.0-alpha.0"
+version = "0.2.0-alpha.1"
 description = "Library to generate / parse / compare TLSH locality sensitive hashes"
 authors = ["Tsukasa OI"]
 keywords = ["tlsh", "hash", "security", "clustering"]
