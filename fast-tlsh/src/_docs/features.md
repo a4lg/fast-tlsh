@@ -101,7 +101,7 @@ in detail for your needs.
         *   `x86_64` (SSE2 (baseline) / SSSE3 / SSE4.1 / AVX2)
         *   `wasm32` (128-bit SIMD)
         *   `aarch64` (ASIMD, originally called NEON)
-        *   `arm` (NEON; only when the `unstable` features is enabled and the
+        *   `arm` (NEON; only when the `unstable` feature is enabled and the
             target is ARMv7 or later)
 *   `simd-portable` (unstable, safe by itself; depends on `unstable`)
     If you enable this feature, all SIMD implementations but hexadecimal string
