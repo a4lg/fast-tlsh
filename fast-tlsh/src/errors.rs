@@ -181,7 +181,11 @@ impl Display for ParseErrorEither {
 #[cfg(all(feature = "easy-functions", feature = "std"))]
 #[cfg_attr(feature = "unstable", doc(cfg(all())))]
 impl std::error::Error for ParseErrorEither {}
-#[cfg(all(feature = "easy-functions", not(feature = "std"), fast_tlsh_error_in_core = "stable"))]
+#[cfg(all(
+    feature = "easy-functions",
+    not(feature = "std"),
+    fast_tlsh_error_in_core = "stable"
+))]
 impl core::error::Error for ParseErrorEither {}
 
 /// The error type describing either a generator error or an I/O error.
