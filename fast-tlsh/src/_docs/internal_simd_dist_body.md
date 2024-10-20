@@ -4,7 +4,7 @@ SIMD-friendly TLSH Body Distance Calculation
 *   Author: Tsukasa OI
 *   Date: 2024-02-16 (original description of the algorithm)
     *   Slightly modified (for this Rust crate): 2024-03-03
-    *   Last mofidication: 2024-05-17
+    *   Last mofidication: 2024-10-20
 
 This document describes a SIMD-friendly algorithm for computing distance between
 two TLSH bodies (consisting an array of dibits), the biggest contributor for
@@ -21,7 +21,7 @@ The distance between two TLSH bodies can be determined as below:
     (e.g. a TLSH body byte `0x00_01_10_11` → `[0b00, 0b01, 0b10, 0b11]`)
 2.  For each dibit pair (at the same position; `X` and `Y`), compute
     the sub-distance:  
-    `D := abs(X - Y); D = if D == 3 { 6 } else { D };`
+    `D := abs(X - Y); D := if D == 3 { 6 } else { D };`
 3.  Take the sum.
 
 
@@ -31,13 +31,13 @@ Expression
 ### Sub-expression 1 (in 2-bits)
 
 ```text
-A = ((X ^ Y) & (X ^ ((Y & 0b01) * 0b11)))
+A := ((X ^ Y) & (X ^ ((Y & 0b01) * 0b11)))
 ```
 
 ### Sub-expression 2 (in 2-bits)
 
 ```text
-B = ((X ^ Y) & ((((X ^ Y) & (X ^ (0b10 - (X & 0b01)))) >> 1) * 0b11))
+B := ((X ^ Y) & ((((X ^ Y) & (X ^ (0b10 - (X & 0b01)))) >> 1) * 0b11))
 ```
 
 ### Description
@@ -121,7 +121,7 @@ A      #   00  01  00  11   01  00  01  10   10  01  00  01   11  00  01  00
 B      #   00  00  10  11   00  00  00  00   00  00  00  00   11  10  00  00
 
 A + B  #  000 001 010 110  001 000 001 010  010 001 000 001  110 010 001 000
-    =  #    0   1   2   6    1   0   1   2    2   1   0   1    6   2   1   0 (decimal)
+   ==  #    0   1   2   6    1   0   1   2    2   1   0   1    6   2   1   0 (decimal)
 ```
 
 Of course, `A + B` equals to the expected result.
