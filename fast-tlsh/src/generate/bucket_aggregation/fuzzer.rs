@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024–2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 use rand::{Rng, SeedableRng};
 use rand_xoshiro::Xoshiro256PlusPlus;
@@ -13,7 +13,7 @@ macro_rules! fuzz_aggregate_template {
                 let mut rng = Xoshiro256PlusPlus::seed_from_u64($seed);
                 let mut buckets = [0; $size];
                 for _ in 0..$iter {
-                    buckets.iter_mut().for_each(|x| *x = rng.gen());
+                    buckets.iter_mut().for_each(|x| *x = rng.random());
                     let mut buckets_sorted = buckets;
                     buckets_sorted.sort_unstable();
                     let q1 = buckets_sorted[$size / 4 * 1 - 1];
