@@ -41,7 +41,7 @@ std = ["alloc", "hex-simd?/std", "serde?/std"]
 alloc = ["hex-simd?/alloc", "serde?/alloc"]
 easy-functions = []
 serde = ["dep:serde"]
-serde-buffered = []
+serde-buffered = ["serde"]
 simd = [
     "opt-simd",
     "simd-per-arch",
