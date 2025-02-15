@@ -6,7 +6,7 @@
 #![cfg(test)]
 
 #[forbid(unsafe_code)]
-#[cfg(all(test, not(fast_tlsh_tests_without_debug_assertions)))]
+#[cfg(debug_assertions)]
 #[test]
 #[should_panic]
 fn violation_invariant() {
