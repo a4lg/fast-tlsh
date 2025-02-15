@@ -294,6 +294,19 @@ fn min_lengths() {
     check::<hashes::LongWithLongChecksum, NUM_BUCKETS_LONG>(STATISTICALLY_OKAY_WITH_LEN_49);
 }
 
+#[test]
+fn max_lengths() {
+    fn check<F: ConstrainedFuzzyHashType>()
+    {
+        assert_eq!(TlshGeneratorFor::<F>::MAX, crate::length::MAX);
+    }
+    check::<hashes::Short>();
+    check::<hashes::Normal>();
+    check::<hashes::NormalWithLongChecksum>();
+    check::<hashes::Long>();
+    check::<hashes::LongWithLongChecksum>();
+}
+
 /// Return the [`TlshGenerator`] which virtually processed
 /// specified repetition of `[0xa4, 0x0e]`.
 fn generator_with_a40e_repetitions(rep: u32) -> TlshGenerator {

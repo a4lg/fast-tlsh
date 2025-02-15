@@ -553,7 +553,7 @@ pub(crate) mod inner {
         const IS_CHECKSUM_EFFECTIVE: bool = true;
         const MIN: u32 = LengthProcessingInfo::<SIZE_BUCKETS>::MIN;
         const MIN_CONSERVATIVE: u32 = LengthProcessingInfo::<SIZE_BUCKETS>::MIN_CONSERVATIVE;
-        const MAX: u32 = LengthProcessingInfo::<SIZE_BUCKETS>::MIN;
+        const MAX: u32 = LengthProcessingInfo::<SIZE_BUCKETS>::MAX;
 
         fn processed_len(&self) -> Option<u32> {
             self.len.checked_add(self.tail_len)

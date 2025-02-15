@@ -210,7 +210,7 @@ const TOP_VALUE_BY_ENCODING: [u32; ENCODED_VALUE_SIZE] = [
 ];
 
 /// The maximum data length (inclusive).
-const MAX: u32 = TOP_VALUE_BY_ENCODING[TOP_VALUE_BY_ENCODING.len() - 1];
+pub(crate) const MAX: u32 = TOP_VALUE_BY_ENCODING[TOP_VALUE_BY_ENCODING.len() - 1];
 
 /// Denotes bucket count-specific length constraints.
 pub trait ConstrainedLengthProcessingInfo: private::Sealed {
