@@ -393,3 +393,28 @@ fn max_distances() {
         1707 + 1536
     );
 }
+
+#[test]
+fn auto_impl_send() {
+    /*
+        `FuzzyHash` struct (in the version 0.1.8) is marked as `!Send` due
+        to complicated indirection to hide implementation details but this is
+        only a documentation issue (actual instantiations of `FuzzyHash`
+        are indeed `Send`).
+
+        Planned version 0.2 will implement a measure to mark all
+        instantiations of `FuzzyHash` implement all automatic traits.
+        (TODO: fix comment when the next version is released)
+
+        Before that happens, this test case make sures that a
+        `FuzzyHash` instantiation (`hashes::Short` in this case) is
+        `Send` despite being `FuzzyHash` struct is documented as `!Send`.
+
+        It is confirmed that implementing negative `!Send` to either
+        `FuzzyHash` struct or its internal representation results in
+        a compilation error here.
+    */
+    let join_handle =
+        std::thread::spawn(|| hashes::Short::from_str("T1E16004017D3551777571D55C005CC5").unwrap());
+    let _result = join_handle.join().unwrap();
+}
