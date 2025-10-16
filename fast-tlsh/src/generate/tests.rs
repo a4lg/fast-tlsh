@@ -160,9 +160,9 @@ fn tlsh_timing_unittest_vector() {
     // Displayed in the official implementation's timing_unittest.
     // Repeat 'A' through 'Z' for 1 000 000 bytes (except the last byte: '\0')
     let buffer: Vec<_> = (b'A'..=b'Z').cycle().take(1000000 - 1).chain([0]).collect();
-    let mut gen = TlshGenerator::new();
-    gen.update(&buffer);
-    let hash = gen.finalize().unwrap();
+    let mut generator = TlshGenerator::new();
+    generator.update(&buffer);
+    let hash = generator.finalize().unwrap();
     let expected = "T1A12500088C838B0A0F0EC3C0ACAB82F3B8228B0308CFA302338C0F0AE2C24F28000008";
     let expected = Tlsh::from_str(expected).unwrap();
     assert_eq!(hash, expected);
@@ -179,9 +179,9 @@ fn tlsh_timing_unittest_vector_hidden() {
         .take(1000000 - 1)
         .chain([0])
         .collect();
-    let mut gen = TlshGenerator::new();
-    gen.update(&buffer);
-    let hash = gen.finalize().unwrap();
+    let mut generator = TlshGenerator::new();
+    generator.update(&buffer);
+    let hash = generator.finalize().unwrap();
     let expected = "T129251210F4C18D0A5F0661C4F64D905B585253A3024F022323E5074CC5601904886D1C";
     let expected = Tlsh::from_str(expected).unwrap();
     assert_eq!(hash, expected);
