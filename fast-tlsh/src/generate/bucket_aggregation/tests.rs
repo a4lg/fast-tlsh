@@ -8,8 +8,8 @@
 use super::naive::{self, get_quartile};
 use super::{aggregate_128, aggregate_256, aggregate_48};
 
-use crate::hash::body::{BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT};
 use crate::internals::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
+use crate::internals::hash::body::{BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT};
 
 #[test]
 fn test_naive_get_quartile() {

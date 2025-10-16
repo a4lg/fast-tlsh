@@ -8,7 +8,7 @@
 use super::naive::{self, distance_dibits};
 use super::{pseudo_simd_32, pseudo_simd_64};
 
-use crate::hash::body::{BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT};
+use crate::internals::hash::body::{BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT};
 
 #[test]
 fn max_quartile_distance() {

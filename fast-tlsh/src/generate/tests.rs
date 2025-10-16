@@ -335,7 +335,7 @@ fn generator_with_a40e_repetitions(rep: u32) -> TlshGenerator {
         generator.inner.len = (total_size - 4) as u32;
         if rep > 2 {
             generator.inner.checksum =
-                crate::hash::checksum::FuzzyHashChecksumData::<1, 128>::from_raw(&[
+                crate::internals::hash::checksum::FuzzyHashChecksumData::<1, 128>::from_raw(&[
                     CHECKSUM_VALUES[rem_rep as usize % CHECKSUM_VALUES.len()],
                 ]);
             generator.inner.buckets.buckets[0x14] = rem_rep;

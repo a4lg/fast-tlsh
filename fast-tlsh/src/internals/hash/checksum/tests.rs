@@ -1,15 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 // SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
-//! Tests: [`crate::hash::checksum`].
+//! Tests: [`crate::internals::hash::checksum`].
 
 #![cfg(test)]
 
-use super::inner::InnerChecksum;
-use super::inner::OneByteChecksumChecker as OneByteChecksumCheckerTrait;
 use super::{
-    FuzzyHashChecksum, FuzzyHashChecksumData, OneByteChecksumChecker, CHECKSUM_SIZE_LONG,
-    CHECKSUM_SIZE_NORMAL,
+    FuzzyHashChecksum, FuzzyHashChecksumData, FuzzyHashChecksumMut, OneByteChecksumChecker,
+    OneByteChecksumCheckerType, CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL,
 };
 
 use crate::internals::buckets::{
@@ -37,7 +35,7 @@ fn one_byte_checksum_checker_256() {
     fn test_all_checksum_is_valid<const SIZE_BUCKETS: usize>()
     where
         FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper,
-        OneByteChecksumChecker<SIZE_BUCKETS>: OneByteChecksumCheckerTrait,
+        OneByteChecksumChecker<SIZE_BUCKETS>: OneByteChecksumCheckerType,
     {
         for value in u8::MIN..=u8::MAX {
             assert!(OneByteChecksumChecker::<SIZE_BUCKETS>::is_valid(value));

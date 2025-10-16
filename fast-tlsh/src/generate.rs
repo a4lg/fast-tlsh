@@ -4,14 +4,15 @@
 
 //! The fuzzy hash generator.
 
-use crate::hash::body::{FuzzyHashBody, FuzzyHashBodyData};
-use crate::hash::checksum::inner::InnerChecksum;
-use crate::hash::checksum::{FuzzyHashChecksum, FuzzyHashChecksumData};
-use crate::hash::qratios::FuzzyHashQRatios;
 use crate::internals::buckets::{
     FuzzyHashBucketMapper, FuzzyHashBucketsData, FuzzyHashBucketsInfo,
 };
 use crate::internals::errors::GeneratorError;
+use crate::internals::hash::body::{FuzzyHashBody, FuzzyHashBodyData};
+use crate::internals::hash::checksum::{
+    FuzzyHashChecksum, FuzzyHashChecksumData, FuzzyHashChecksumMut,
+};
+use crate::internals::hash::qratios::FuzzyHashQRatios;
 use crate::internals::intrinsics::{likely, unlikely};
 use crate::internals::length::{
     ConstrainedLengthProcessingInfo, DataLengthProcessingMode, DataLengthValidity,
@@ -542,7 +543,7 @@ pub(crate) mod inner {
         >: ConstrainedVerboseFuzzyHashParams,
         LengthProcessingInfo<SIZE_BUCKETS>: ConstrainedLengthProcessingInfo,
     {
-        type Output = crate::hash::inner::FuzzyHash<
+        type Output = crate::internals::hash::FuzzyHash<
             SIZE_CKSUM,
             SIZE_BODY,
             SIZE_BUCKETS,

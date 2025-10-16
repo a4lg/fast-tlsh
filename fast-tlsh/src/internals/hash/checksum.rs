@@ -23,37 +23,25 @@ pub(crate) mod private {
     pub trait Sealed {}
 }
 
-/// The inner part.
-pub(crate) mod inner {
-    /// The trait representing "updating" behavior of the checksum.
+/// The trait to provide one byte checksum validness checker.
+pub trait OneByteChecksumCheckerType: private::Sealed {
+    /// Returns whether the given checksum value is valid.
     ///
-    /// From the outside, only "read-only" part is public and "updating" part
-    /// should be kept private in this crate.
-    pub trait InnerChecksum: super::private::Sealed {
-        /// Update the checksum by the last two bytes in the update window.
-        fn update(&mut self, curr: u8, prev: u8);
-    }
-
-    /// The trait to provide one byte checksum validness checker.
-    pub trait OneByteChecksumChecker: super::private::Sealed {
-        /// Returns whether the given checksum value is valid.
-        ///
-        /// In the default implementation, it is always [`true`] because
-        /// all values are valid.
-        #[allow(unused_variables)]
-        fn is_valid(checksum: u8) -> bool {
-            true
-        }
+    /// In the default implementation, it is always [`true`] because
+    /// all values are valid.
+    #[allow(unused_variables)]
+    fn is_valid(checksum: u8) -> bool {
+        true
     }
 }
 
-/// Implementation provider for [`inner::OneByteChecksumChecker`].
+/// Implementation provider for [`OneByteChecksumChecker`].
 struct OneByteChecksumChecker<const SIZE_BUCKETS: usize>
 where
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper;
 
 impl private::Sealed for OneByteChecksumChecker<NUM_BUCKETS_SHORT> {}
-impl inner::OneByteChecksumChecker for OneByteChecksumChecker<NUM_BUCKETS_SHORT> {
+impl OneByteChecksumCheckerType for OneByteChecksumChecker<NUM_BUCKETS_SHORT> {
     /// Returns whether the given checksum value is valid.
     ///
     /// In the 48 bucket variant, it checks whether the value is
@@ -63,15 +51,24 @@ impl inner::OneByteChecksumChecker for OneByteChecksumChecker<NUM_BUCKETS_SHORT>
     }
 }
 impl private::Sealed for OneByteChecksumChecker<NUM_BUCKETS_NORMAL> {}
-impl inner::OneByteChecksumChecker for OneByteChecksumChecker<NUM_BUCKETS_NORMAL> {}
+impl OneByteChecksumCheckerType for OneByteChecksumChecker<NUM_BUCKETS_NORMAL> {}
 impl private::Sealed for OneByteChecksumChecker<NUM_BUCKETS_LONG> {}
-impl inner::OneByteChecksumChecker for OneByteChecksumChecker<NUM_BUCKETS_LONG> {}
+impl OneByteChecksumCheckerType for OneByteChecksumChecker<NUM_BUCKETS_LONG> {}
+
+/// The trait representing "updating" behavior of the checksum.
+///
+/// This trait is separate from [`FuzzyHashChecksum`] to expose
+/// read-only part only.
+pub trait FuzzyHashChecksumMut: private::Sealed {
+    /// Update the checksum by the last two bytes in the update window.
+    fn update(&mut self, curr: u8, prev: u8);
+}
 
 /// The trait representing the checksum part of the fuzzy hash.
 ///
 /// For the background of configurations, see [`FuzzyHashChecksumData`]
 /// documentation.
-pub trait FuzzyHashChecksum: inner::InnerChecksum {
+pub trait FuzzyHashChecksum: FuzzyHashChecksumMut {
     /// The size of the checksum.
     const SIZE: usize;
     /// The maximum distance between two checksums on this configuration.
@@ -157,7 +154,7 @@ where
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper,
 {
 }
-impl<const SIZE_BUCKETS: usize> inner::InnerChecksum
+impl<const SIZE_BUCKETS: usize> FuzzyHashChecksumMut
     for FuzzyHashChecksumData<CHECKSUM_SIZE_NORMAL, SIZE_BUCKETS>
 where
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper,
@@ -171,12 +168,12 @@ impl<const SIZE_BUCKETS: usize> FuzzyHashChecksum
     for FuzzyHashChecksumData<CHECKSUM_SIZE_NORMAL, SIZE_BUCKETS>
 where
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper,
-    OneByteChecksumChecker<SIZE_BUCKETS>: inner::OneByteChecksumChecker,
+    OneByteChecksumChecker<SIZE_BUCKETS>: OneByteChecksumCheckerType,
 {
     const SIZE: usize = CHECKSUM_SIZE_NORMAL;
     const MAX_DISTANCE: u32 = CHECKSUM_SIZE_NORMAL as u32;
     fn is_valid(&self) -> bool {
-        use inner::OneByteChecksumChecker as _;
+        use OneByteChecksumCheckerType as _;
         OneByteChecksumChecker::<SIZE_BUCKETS>::is_valid(self.data[0])
     }
     #[inline(always)]
@@ -192,7 +189,7 @@ where
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: LongFuzzyHashBucketMapper,
 {
 }
-impl<const SIZE_BUCKETS: usize> inner::InnerChecksum
+impl<const SIZE_BUCKETS: usize> FuzzyHashChecksumMut
     for FuzzyHashChecksumData<CHECKSUM_SIZE_LONG, SIZE_BUCKETS>
 where
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: LongFuzzyHashBucketMapper,

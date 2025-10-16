@@ -78,14 +78,14 @@ pub use generate_easy_std::{hash_file, hash_file_for, hash_stream, hash_stream_f
 
 // Trait re-exports
 pub use generate::public::GeneratorType;
-pub use hash::public::FuzzyHashType;
+pub use internals::hash::FuzzyHashType;
 
 // Type re-exports
 pub use generate::GeneratorOptions;
-pub use hash::HexStringPrefix;
 pub use internals::compare::ComparisonConfiguration;
 pub use internals::errors::{GeneratorError, GeneratorErrorCategory};
 pub use internals::errors::{OperationError, ParseError};
+pub use internals::hash::HexStringPrefix;
 pub use internals::length::DataLengthProcessingMode;
 
 #[cfg(all(feature = "easy-functions", feature = "std"))]

@@ -3,8 +3,8 @@
 
 //! The TLSH parameters.
 
-use crate::hash::checksum::{CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL};
 use crate::internals::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
+use crate::internals::hash::checksum::{CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL};
 use crate::{FuzzyHashType, GeneratorType};
 
 /// The private part.
@@ -25,7 +25,7 @@ pub trait ConstrainedFuzzyHashParams: private::SealedParam {
     /// The inner fuzzy hash type used by the public implementation.
     ///
     /// This is an instantiation of
-    /// [`FuzzyHash`](crate::hash::inner::FuzzyHash).
+    /// [`FuzzyHash`](crate::internals::hash::FuzzyHash).
     type InnerFuzzyHashType: FuzzyHashType
         + core::fmt::Debug
         + core::fmt::Display
@@ -111,7 +111,7 @@ macro_rules! param_checksum_desc {
 /// The inner fuzzy hash type.
 macro_rules! inner_fuzzy_hash_type {
     ($size_checksum:expr, $size_buckets:tt) => {
-        $crate::hash::inner::FuzzyHash<
+        $crate::internals::hash::FuzzyHash<
             {$size_checksum},
             {$size_buckets / 4},
             {$size_buckets},
