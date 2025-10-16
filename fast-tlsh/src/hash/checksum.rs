@@ -3,12 +3,12 @@
 
 //! The checksum part of the fuzzy hash.
 
-use crate::compare::dist_checksum::{distance_1, distance_3};
 use crate::errors::ParseError;
 use crate::internals::buckets::{
     FuzzyHashBucketMapper, FuzzyHashBucketsInfo, LongFuzzyHashBucketMapper, NUM_BUCKETS_LONG,
     NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT,
 };
+use crate::internals::compare::dist_checksum::{distance_1, distance_3};
 use crate::internals::parse::hex_str::decode_rev_array;
 use crate::internals::pearson::tlsh_b_mapping_256;
 

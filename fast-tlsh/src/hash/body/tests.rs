@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! Tests: [`crate::hash::body`].
 
@@ -7,8 +7,8 @@
 
 use super::{FuzzyHashBody, FuzzyHashBodyData, BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT};
 
-use crate::compare::dist_body::naive::distance_dibits;
 use crate::errors::ParseError;
+use crate::internals::compare::dist_body::naive::distance_dibits;
 
 #[test]
 fn prerequisites() {

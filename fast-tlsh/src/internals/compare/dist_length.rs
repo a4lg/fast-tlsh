@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>
 
 //! TLSH length comparison.
 //!
 //! This depends on the difference of encoded 8-bit length specifier.
-//! If their [distance (on the ring of modulo 256)](crate::compare::utils::distance_on_ring_mod())
+//! If their [distance (on the ring of modulo 256)](crate::internals::compare::utils::distance_on_ring_mod())
 //! is equal to or less than `1`, that value is the distance.  If not, the raw
 //! distance `d` is multiplied by the implementation-defined constant:
 //! [`12`](length_mult_value!()).
@@ -13,7 +13,7 @@
 //! easily configurable in this crate but we usually use this parameter unless
 //! you are experimenting with your custom workloads.
 
-use crate::compare::utils::distance_on_ring_mod;
+use crate::internals::compare::utils::distance_on_ring_mod;
 
 /// The length distance multiplier as an ambiguously-typed literal.
 macro_rules! length_mult {

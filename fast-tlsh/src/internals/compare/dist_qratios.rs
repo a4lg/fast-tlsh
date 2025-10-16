@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>
 
 //! TLSH Q ratio pair comparison.
 //!
 //! This module accepts an [`u8`] as a pair of Q ratio values,
 //! encoded as lower and upper nibbles (4-bits each).
 //!
-//! For each of the Q ratio, we calculate [the distance (on the ring of modulo 16)](crate::compare::utils::distance_on_ring_mod()).
+//! For each of the Q ratio, we calculate [the distance (on the ring of modulo 16)](crate::internals::compare::utils::distance_on_ring_mod()).
 //! If this is equal to or less than `1`, that value is the sub-distance.
 //! If not, the raw sub-distance `d` is subtracted by 1 and then multiplied by
 //! the implementation-defined constant: [`12`](qratio_mult_value!()).
@@ -118,7 +118,7 @@ pub fn distance(qratios1: u8, qratios2: u8) -> u32 {
 
 /// The naïve implementation.
 mod naive {
-    use crate::compare::utils::distance_on_ring_mod;
+    use crate::internals::compare::utils::distance_on_ring_mod;
 
     /// Computes the distance between two Q ratio values.
     ///

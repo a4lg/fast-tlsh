@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
-//! Tests: `crate::compare::utils`.
+//! Tests: `crate::internals::compare::utils`.
 
 #![cfg(test)]
 
 use std::collections::hash_map::Entry;
 use std::collections::HashMap;
 
-use crate::compare::utils::generic;
+use crate::internals::compare::utils::generic;
 
 #[test]
 fn mod_diff_16() {

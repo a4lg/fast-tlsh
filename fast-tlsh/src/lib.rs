@@ -61,7 +61,6 @@ extern crate alloc;
 mod internals;
 
 pub mod _docs;
-mod compare;
 mod errors;
 pub mod generate;
 pub mod hash;
@@ -84,11 +83,11 @@ pub use generate::public::GeneratorType;
 pub use hash::public::FuzzyHashType;
 
 // Type re-exports
-pub use compare::ComparisonConfiguration;
 pub use errors::{GeneratorError, GeneratorErrorCategory};
 pub use errors::{OperationError, ParseError};
 pub use generate::GeneratorOptions;
 pub use hash::HexStringPrefix;
+pub use internals::compare::ComparisonConfiguration;
 pub use length::DataLengthProcessingMode;
 
 #[cfg(all(feature = "easy-functions", feature = "std"))]
