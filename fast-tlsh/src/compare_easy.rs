@@ -5,9 +5,9 @@
 
 #![cfg(feature = "easy-functions")]
 
+use crate::Tlsh;
 use crate::internals::errors::{ParseErrorEither, ParseErrorSide};
 use crate::internals::params::ConstrainedFuzzyHashType;
-use crate::Tlsh;
 
 /// Compare two fuzzy hashes with specified intermediate fuzzy hash type.
 ///

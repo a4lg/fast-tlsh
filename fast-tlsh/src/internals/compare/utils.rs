@@ -23,11 +23,7 @@ pub const fn distance_on_ring_mod(x: u8, y: u8, n: u8) -> u8 {
         (x.wrapping_add(n).wrapping_sub(y), y.wrapping_sub(x))
     };
     // Take the minimum (because u8::min is unavailable in the constant context)
-    if dl <= dr {
-        dl
-    } else {
-        dr
-    }
+    if dl <= dr { dl } else { dr }
 }
 
 /// The generic implementation.

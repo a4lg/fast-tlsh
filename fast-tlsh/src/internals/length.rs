@@ -10,7 +10,7 @@ use crate::internals::buckets::{
     FuzzyHashBucketMapper, FuzzyHashBucketsInfo, NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL,
     NUM_BUCKETS_SHORT,
 };
-use crate::internals::compare::dist_length::{distance, MAX_DISTANCE};
+use crate::internals::compare::dist_length::{MAX_DISTANCE, distance};
 use crate::internals::errors::ParseError;
 #[allow(unused_imports)]
 use crate::internals::macros::{invariant, optionally_unsafe};

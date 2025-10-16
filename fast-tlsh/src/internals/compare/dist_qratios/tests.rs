@@ -19,11 +19,13 @@ use super::QRatiosDistanceTableType2;
 fn arithmetic_correctness_naive() {
     // No arithmetic overflow occurs on the naïve implementation.
     // 0x08 is the maximum value of mod_diff(x, y, 16).
-    assert!(0x08u32
-        .checked_sub(1)
-        .and_then(|x| x.checked_mul(2))
-        .and_then(|x| x.checked_mul(qratio_mult!()))
-        .is_some());
+    assert!(
+        0x08u32
+            .checked_sub(1)
+            .and_then(|x| x.checked_mul(2))
+            .and_then(|x| x.checked_mul(qratio_mult!()))
+            .is_some()
+    );
 }
 
 #[cfg(all(
@@ -40,10 +42,11 @@ where
     // Above constraints make sures that u8 ⊆ QRatiosDistanceTableType ⊆ u32.
     // 0x08 is the maximum value of mod_diff(x, y, 16).
     let dist = QRatiosDistanceTableType::from(0x08u8);
-    assert!(dist
-        .checked_sub(1)
-        .and_then(|x| x.checked_mul(qratio_mult!()))
-        .is_some());
+    assert!(
+        dist.checked_sub(1)
+            .and_then(|x| x.checked_mul(qratio_mult!()))
+            .is_some()
+    );
 }
 
 #[cfg(feature = "opt-dist-qratios-table-double")]
@@ -57,11 +60,12 @@ where
     // Above constraints make sures that u8 ⊆ QRatiosDistanceTableType2 ⊆ u32.
     // 0x08 is the maximum value of mod_diff(x, y, 16).
     let dist = QRatiosDistanceTableType2::from(0x08u8);
-    assert!(dist
-        .checked_sub(1)
-        .and_then(|x| x.checked_mul(2))
-        .and_then(|x| x.checked_mul(qratio_mult!()))
-        .is_some());
+    assert!(
+        dist.checked_sub(1)
+            .and_then(|x| x.checked_mul(2))
+            .and_then(|x| x.checked_mul(qratio_mult!()))
+            .is_some()
+    );
 }
 
 #[test]

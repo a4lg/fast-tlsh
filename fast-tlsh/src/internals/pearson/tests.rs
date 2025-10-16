@@ -6,8 +6,8 @@
 #![cfg(test)]
 
 use super::{
-    final_256, final_48, init, tlsh_b_mapping_256, tlsh_b_mapping_48, update, update_double,
-    INITIAL_STATE, SUBST_TABLE,
+    INITIAL_STATE, SUBST_TABLE, final_48, final_256, init, tlsh_b_mapping_48, tlsh_b_mapping_256,
+    update, update_double,
 };
 
 #[test]
@@ -63,11 +63,7 @@ fn final_48_and_256() {
         for value in u8::MIN..=u8::MAX {
             let expected = {
                 let v = final_256(state, value);
-                if v >= 240 {
-                    48
-                } else {
-                    v % 48
-                }
+                if v >= 240 { 48 } else { v % 48 }
             };
             assert_eq!(final_48(state, value), expected);
         }

@@ -13,11 +13,7 @@
 /// Computes the distance between two 1-byte checksum values.
 #[inline(always)]
 pub const fn distance_1(checksum1: [u8; 1], checksum2: [u8; 1]) -> u32 {
-    if checksum1[0] != checksum2[0] {
-        1
-    } else {
-        0
-    }
+    if checksum1[0] != checksum2[0] { 1 } else { 0 }
 }
 
 /// Computes the distance between two 3-byte checksum values.

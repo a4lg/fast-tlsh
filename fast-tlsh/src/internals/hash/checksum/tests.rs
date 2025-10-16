@@ -6,8 +6,8 @@
 #![cfg(test)]
 
 use super::{
-    FuzzyHashChecksum, FuzzyHashChecksumData, FuzzyHashChecksumMut, OneByteChecksumChecker,
-    OneByteChecksumCheckerType, CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL,
+    CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL, FuzzyHashChecksum, FuzzyHashChecksumData,
+    FuzzyHashChecksumMut, OneByteChecksumChecker, OneByteChecksumCheckerType,
 };
 
 use crate::internals::buckets::{

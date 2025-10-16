@@ -5,8 +5,8 @@
 
 #![cfg(test)]
 
-use std::collections::hash_map::Entry;
 use std::collections::HashMap;
+use std::collections::hash_map::Entry;
 
 use crate::internals::compare::utils::generic;
 

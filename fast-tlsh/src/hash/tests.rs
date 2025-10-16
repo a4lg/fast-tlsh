@@ -9,11 +9,11 @@ use super::{ComparisonConfiguration, HexStringPrefix};
 
 use core::str::FromStr;
 
+use crate::FuzzyHashType;
 use crate::hashes;
 use crate::internals::buckets::NUM_BUCKETS_SHORT;
 use crate::internals::errors::{OperationError, ParseError};
 use crate::internals::length::ENCODED_VALUE_SIZE;
-use crate::FuzzyHashType;
 
 #[test]
 fn hex_string_prefix_default() {

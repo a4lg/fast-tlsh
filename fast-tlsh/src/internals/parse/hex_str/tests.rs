@@ -6,17 +6,17 @@
 #![cfg(test)]
 
 use super::{
-    decode_1, decode_array, decode_digit, decode_rev_1, decode_rev_array, encode_rev_1,
-    encode_rev_array, HEX_UPPER_NIBBLE_TABLE,
+    HEX_UPPER_NIBBLE_TABLE, decode_1, decode_array, decode_digit, decode_rev_1, decode_rev_array,
+    encode_rev_1, encode_rev_array,
 };
 
 #[cfg(not(feature = "opt-low-memory-hex-str-decode-half-table"))]
 use super::HEX_REV_TABLE_HI;
 #[cfg(not(feature = "opt-low-memory-hex-str-decode-min-table"))]
-use super::{HexDecodeTableType, HEX_INVALID, HEX_REV_TABLE_LO};
+use super::{HEX_INVALID, HEX_REV_TABLE_LO, HexDecodeTableType};
 
-use std::collections::hash_map::Entry;
 use std::collections::HashMap;
+use std::collections::hash_map::Entry;
 
 use crate::internals::parse::bits::swap_nibble_in_u8;
 

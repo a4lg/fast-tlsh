@@ -303,12 +303,12 @@ pub trait FuzzyHashType: Sized + FromStr<Err = ParseError> + Display {
 }
 
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper,
@@ -333,13 +333,12 @@ where
 }
 
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > FuzzyHashType
-    for FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> FuzzyHashType for FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper,
@@ -505,12 +504,12 @@ where
 }
 
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > TryFrom<&[u8; SIZE_IN_BYTES]>
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> TryFrom<&[u8; SIZE_IN_BYTES]>
     for FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,
@@ -550,12 +549,12 @@ where
 }
 
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > TryFrom<&[u8]>
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> TryFrom<&[u8]>
     for FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,
@@ -577,12 +576,12 @@ where
 }
 
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > FromStr for FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> FromStr for FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper,
@@ -598,12 +597,12 @@ where
 }
 
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > Display for FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> Display for FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper,
@@ -629,12 +628,12 @@ where
 
 #[cfg(feature = "serde")]
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > Serialize for FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> Serialize for FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper,
@@ -690,12 +689,12 @@ struct FuzzyHashStringVisitor<
 
 #[cfg(feature = "serde")]
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > Visitor<'_>
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> Visitor<'_>
     for FuzzyHashStringVisitor<
         SIZE_CKSUM,
         SIZE_BODY,
@@ -755,12 +754,12 @@ struct FuzzyHashBytesVisitor<
 
 #[cfg(feature = "serde")]
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > Visitor<'_>
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> Visitor<'_>
     for FuzzyHashBytesVisitor<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,
@@ -788,13 +787,13 @@ where
 
 #[cfg(feature = "serde")]
 impl<
-        'de,
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > Deserialize<'de>
+    'de,
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> Deserialize<'de>
     for FuzzyHash<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,

@@ -6,9 +6,9 @@
 #![cfg(test)]
 
 use super::{
-    encode, naive, ConstrainedLengthProcessingInfo, DataLengthProcessingMode, DataLengthValidity,
-    FuzzyHashLengthEncoding, LengthProcessingInfo, ENCODED_INDICES_BY_LEADING_ZEROS,
-    ENCODED_VALUE_SIZE, TOP_VALUE_BY_ENCODING,
+    ConstrainedLengthProcessingInfo, DataLengthProcessingMode, DataLengthValidity,
+    ENCODED_INDICES_BY_LEADING_ZEROS, ENCODED_VALUE_SIZE, FuzzyHashLengthEncoding,
+    LengthProcessingInfo, TOP_VALUE_BY_ENCODING, encode, naive,
 };
 
 use crate::internals::buckets::{

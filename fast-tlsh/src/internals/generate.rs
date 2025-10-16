@@ -4,6 +4,7 @@
 
 //! The fuzzy hash generator.
 
+use crate::FuzzyHashType;
 use crate::internals::buckets::{
     FuzzyHashBucketMapper, FuzzyHashBucketsData, FuzzyHashBucketsInfo,
 };
@@ -20,7 +21,6 @@ use crate::internals::length::{
 };
 use crate::internals::macros::{invariant, optionally_unsafe};
 use crate::internals::params::{ConstrainedVerboseFuzzyHashParams, VerboseFuzzyHashParams};
-use crate::FuzzyHashType;
 
 pub(crate) mod bucket_aggregation;
 
@@ -427,12 +427,12 @@ pub struct Generator<
 }
 
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > Generator<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> Generator<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,
     FuzzyHashBucketsInfo<SIZE_BUCKETS>:
@@ -461,12 +461,12 @@ where
     }
 }
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > Default for Generator<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> Default for Generator<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,
     FuzzyHashBucketsInfo<SIZE_BUCKETS>:
@@ -487,12 +487,12 @@ where
     }
 }
 impl<
-        const SIZE_CKSUM: usize,
-        const SIZE_BODY: usize,
-        const SIZE_BUCKETS: usize,
-        const SIZE_IN_BYTES: usize,
-        const SIZE_IN_STR_BYTES: usize,
-    > crate::GeneratorType
+    const SIZE_CKSUM: usize,
+    const SIZE_BODY: usize,
+    const SIZE_BUCKETS: usize,
+    const SIZE_IN_BYTES: usize,
+    const SIZE_IN_STR_BYTES: usize,
+> crate::GeneratorType
     for Generator<SIZE_CKSUM, SIZE_BODY, SIZE_BUCKETS, SIZE_IN_BYTES, SIZE_IN_STR_BYTES>
 where
     FuzzyHashBodyData<SIZE_BODY>: FuzzyHashBody,

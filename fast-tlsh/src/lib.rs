@@ -153,8 +153,8 @@ pub mod hashes;
 /// Data length encodings and other handlings.
 pub mod length {
     pub use crate::internals::length::{
-        ConstrainedLengthProcessingInfo, DataLengthValidity, FuzzyHashLengthEncoding,
-        LengthProcessingInfo, ENCODED_VALUE_SIZE,
+        ConstrainedLengthProcessingInfo, DataLengthValidity, ENCODED_VALUE_SIZE,
+        FuzzyHashLengthEncoding, LengthProcessingInfo,
     };
 }
 

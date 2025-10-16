@@ -3,7 +3,7 @@
 
 //! The Q ratio pair part of the fuzzy hash.
 
-use crate::internals::compare::dist_qratios::{distance, MAX_DISTANCE};
+use crate::internals::compare::dist_qratios::{MAX_DISTANCE, distance};
 use crate::internals::errors::ParseError;
 use crate::internals::parse::hex_str::decode_rev_1;
 

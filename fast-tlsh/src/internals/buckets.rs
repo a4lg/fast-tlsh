@@ -6,7 +6,7 @@
 
 use crate::internals::generate::bucket_aggregation;
 use crate::internals::hash::body::{BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT};
-use crate::internals::pearson::{tlsh_b_mapping_256, tlsh_b_mapping_48};
+use crate::internals::pearson::{tlsh_b_mapping_48, tlsh_b_mapping_256};
 use crate::internals::utils::Sealed;
 
 /// The effective number of buckets on the short variant (with 48 buckets).

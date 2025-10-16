@@ -5,12 +5,12 @@
 
 #![cfg(test)]
 
+use crate::FuzzyHashType;
 use crate::hashes;
 use crate::internals::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::internals::hash::checksum::{
-    FuzzyHashChecksum, CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL,
+    CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL, FuzzyHashChecksum,
 };
-use crate::FuzzyHashType;
 
 #[rustfmt::skip]
 #[test]

@@ -219,14 +219,14 @@ where
 /// The body part of the fuzzy hash.
 pub mod body {
     pub use crate::internals::hash::body::{
-        FuzzyHashBody, FuzzyHashBodyData, BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT,
+        BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT, FuzzyHashBody, FuzzyHashBodyData,
     };
 }
 
 /// The checksum part of the fuzzy hash.
 pub mod checksum {
     pub use crate::internals::hash::checksum::{
-        FuzzyHashChecksum, FuzzyHashChecksumData, CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL,
+        CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL, FuzzyHashChecksum, FuzzyHashChecksumData,
     };
 }
 
