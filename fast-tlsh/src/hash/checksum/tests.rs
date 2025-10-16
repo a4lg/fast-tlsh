@@ -12,11 +12,11 @@ use super::{
     CHECKSUM_SIZE_NORMAL,
 };
 
-use crate::errors::ParseError;
 use crate::internals::buckets::{
     FuzzyHashBucketMapper, FuzzyHashBucketsInfo, NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL,
     NUM_BUCKETS_SHORT,
 };
+use crate::internals::errors::ParseError;
 
 #[test]
 fn one_byte_checksum_checker_48() {

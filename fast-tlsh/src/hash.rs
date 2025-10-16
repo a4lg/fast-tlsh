@@ -12,11 +12,11 @@ use serde::de::Visitor;
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
-use crate::errors::{OperationError, ParseError};
 use crate::hash::body::FuzzyHashBody;
 use crate::hash::checksum::FuzzyHashChecksum;
 use crate::hash::qratios::FuzzyHashQRatios;
 use crate::internals::compare::ComparisonConfiguration;
+use crate::internals::errors::{OperationError, ParseError};
 use crate::internals::params::{ConstrainedFuzzyHashParams, FuzzyHashParams};
 use crate::length::FuzzyHashLengthEncoding;
 use crate::FuzzyHashType;
@@ -463,7 +463,10 @@ pub(crate) mod inner {
         }
 
         #[inline]
-        fn store_into_bytes(&self, out: &mut [u8]) -> Result<usize, crate::errors::OperationError> {
+        fn store_into_bytes(
+            &self,
+            out: &mut [u8],
+        ) -> Result<usize, crate::internals::errors::OperationError> {
             if out.len() < Self::SIZE_IN_BYTES {
                 return Err(OperationError::BufferIsTooSmall);
             }
@@ -479,7 +482,7 @@ pub(crate) mod inner {
             &self,
             out: &mut [u8],
             prefix: HexStringPrefix,
-        ) -> Result<usize, crate::errors::OperationError> {
+        ) -> Result<usize, crate::internals::errors::OperationError> {
             let len = match prefix {
                 HexStringPrefix::Empty => Self::LEN_IN_STR_EXCEPT_PREFIX,
                 HexStringPrefix::WithVersion => Self::LEN_IN_STR,
@@ -1029,7 +1032,7 @@ where
     fn from_str_bytes(
         bytes: &[u8],
         prefix: Option<HexStringPrefix>,
-    ) -> Result<Self, crate::errors::ParseError> {
+    ) -> Result<Self, crate::internals::errors::ParseError> {
         <inner_type!(SIZE_CKSUM, SIZE_BUCKETS)>::from_str_bytes(bytes, prefix)
             .map(|inner| Self { inner })
     }
@@ -1050,7 +1053,10 @@ where
         self.inner.body()
     }
     #[inline(always)]
-    fn store_into_bytes(&self, out: &mut [u8]) -> Result<usize, crate::errors::OperationError> {
+    fn store_into_bytes(
+        &self,
+        out: &mut [u8],
+    ) -> Result<usize, crate::internals::errors::OperationError> {
         self.inner.store_into_bytes(out)
     }
     #[inline(always)]

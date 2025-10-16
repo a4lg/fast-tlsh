@@ -5,8 +5,8 @@
 
 #![cfg(feature = "easy-functions")]
 
-use crate::errors::GeneratorError;
 use crate::generate::Generator;
+use crate::internals::errors::GeneratorError;
 use crate::internals::params::ConstrainedFuzzyHashType;
 use crate::{GeneratorType, Tlsh};
 

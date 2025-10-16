@@ -7,8 +7,8 @@
 
 use super::{FuzzyHashBody, FuzzyHashBodyData, BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT};
 
-use crate::errors::ParseError;
 use crate::internals::compare::dist_body::naive::distance_dibits;
+use crate::internals::errors::ParseError;
 
 #[test]
 fn prerequisites() {

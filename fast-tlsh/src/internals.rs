@@ -5,6 +5,7 @@
 
 pub(crate) mod buckets;
 pub(crate) mod compare;
+pub(crate) mod errors;
 pub(crate) mod intrinsics;
 pub(crate) mod macros;
 pub(crate) mod params;

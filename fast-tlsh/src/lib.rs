@@ -61,7 +61,6 @@ extern crate alloc;
 mod internals;
 
 pub mod _docs;
-mod errors;
 pub mod generate;
 pub mod hash;
 pub mod length;
@@ -83,17 +82,17 @@ pub use generate::public::GeneratorType;
 pub use hash::public::FuzzyHashType;
 
 // Type re-exports
-pub use errors::{GeneratorError, GeneratorErrorCategory};
-pub use errors::{OperationError, ParseError};
 pub use generate::GeneratorOptions;
 pub use hash::HexStringPrefix;
 pub use internals::compare::ComparisonConfiguration;
+pub use internals::errors::{GeneratorError, GeneratorErrorCategory};
+pub use internals::errors::{OperationError, ParseError};
 pub use length::DataLengthProcessingMode;
 
 #[cfg(all(feature = "easy-functions", feature = "std"))]
-pub use errors::GeneratorOrIOError;
+pub use internals::errors::GeneratorOrIOError;
 #[cfg(feature = "easy-functions")]
-pub use errors::{ParseErrorEither, ParseErrorSide};
+pub use internals::errors::{ParseErrorEither, ParseErrorSide};
 
 /// The default fuzzy hash type.
 pub type Tlsh = hashes::Normal;

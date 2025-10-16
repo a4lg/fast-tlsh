@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! Tests: [`crate::generate_easy_std`].
 
@@ -10,8 +10,8 @@ use super::{hash_file, hash_file_for, hash_stream, hash_stream_for};
 use std::fs::File;
 use std::io::Read;
 
-use crate::errors::{GeneratorError, GeneratorOrIOError};
 use crate::hashes;
+use crate::internals::errors::{GeneratorError, GeneratorOrIOError};
 
 const NONEXISTENT_PATH: &str = "data/examples/nonexistent_path";
 const EMPTY_PATH: &str = "data/examples/empty.bin";

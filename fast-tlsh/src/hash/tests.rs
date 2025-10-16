@@ -9,9 +9,9 @@ use super::{ComparisonConfiguration, HexStringPrefix};
 
 use core::str::FromStr;
 
-use crate::errors::{OperationError, ParseError};
 use crate::hashes;
 use crate::internals::buckets::NUM_BUCKETS_SHORT;
+use crate::internals::errors::{OperationError, ParseError};
 use crate::length::ENCODED_VALUE_SIZE;
 use crate::FuzzyHashType;
 

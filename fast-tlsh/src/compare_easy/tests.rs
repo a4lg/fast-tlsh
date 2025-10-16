@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! Tests: [`crate::compare_easy`].
 
@@ -7,8 +7,8 @@
 
 use super::{compare, compare_with};
 
-use crate::errors::{ParseError, ParseErrorSide};
 use crate::hashes;
+use crate::internals::errors::{ParseError, ParseErrorSide};
 
 #[test]
 fn test_compare_with() {

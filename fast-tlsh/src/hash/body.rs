@@ -3,12 +3,12 @@
 
 //! The body part of the fuzzy hash.
 
-use crate::errors::ParseError;
 use crate::internals::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::internals::compare::dist_body::{
     distance_12, distance_32, distance_64, MAX_DISTANCE_LONG, MAX_DISTANCE_NORMAL,
     MAX_DISTANCE_SHORT,
 };
+use crate::internals::errors::ParseError;
 
 #[cfg(not(feature = "opt-simd-parse-hex"))]
 use crate::internals::parse::hex_str::decode_array;

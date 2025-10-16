@@ -5,7 +5,7 @@
 
 #![cfg(feature = "easy-functions")]
 
-use crate::errors::{ParseErrorEither, ParseErrorSide};
+use crate::internals::errors::{ParseErrorEither, ParseErrorSide};
 use crate::internals::params::ConstrainedFuzzyHashType;
 use crate::Tlsh;
 

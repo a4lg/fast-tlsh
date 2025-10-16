@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! Tests: [`crate::hash::qratios`].
 
@@ -7,7 +7,7 @@
 
 use super::FuzzyHashQRatios;
 
-use crate::errors::ParseError;
+use crate::internals::errors::ParseError;
 
 #[test]
 fn qratio_pair() {

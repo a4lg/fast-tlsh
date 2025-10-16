@@ -9,8 +9,8 @@ use std::fs::File;
 use std::io::Read;
 use std::path::Path;
 
-use crate::errors::GeneratorOrIOError;
 use crate::generate::Generator;
+use crate::internals::errors::GeneratorOrIOError;
 use crate::internals::macros::{invariant, optionally_unsafe};
 use crate::internals::params::ConstrainedFuzzyHashType;
 use crate::{GeneratorType, Tlsh};
