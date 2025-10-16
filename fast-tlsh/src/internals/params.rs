@@ -10,12 +10,6 @@ use crate::internals::hash::checksum::{CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL}
 use crate::internals::utils::Sealed;
 use crate::{FuzzyHashType, GeneratorType};
 
-/// The private part.
-mod private {
-    /// The sealed trait for verbose parameters.
-    pub trait SealedVerboseParam {}
-}
-
 /// A marker struct for fuzzy hashing parameters.
 pub struct FuzzyHashParams<const SIZE_CKSUM: usize, const SIZE_BUCKETS: usize>;
 
@@ -86,8 +80,7 @@ pub struct VerboseFuzzyHashParams<
 >;
 
 /// A marker trait for valid fuzzy hashing parameters (verbose).
-pub trait ConstrainedVerboseFuzzyHashParams: private::SealedVerboseParam {}
-impl<T> ConstrainedVerboseFuzzyHashParams for T where T: private::SealedVerboseParam {}
+pub trait ConstrainedVerboseFuzzyHashParams: Sealed {}
 
 /// The macro to convert symbolic buckets constant name to string.
 macro_rules! param_buckets_desc {
@@ -156,7 +149,17 @@ macro_rules! params {
     {$($name:ident = ($size_checksum:tt, $size_buckets:tt);)*} => {
         $(
             impl Sealed for FuzzyHashParams<{$size_checksum}, {$size_buckets}> {}
-            impl private::SealedVerboseParam
+            impl Sealed
+                for VerboseFuzzyHashParams<
+                    {$size_checksum},
+                    {$size_buckets / 4},
+                    {$size_buckets},
+                    {$size_buckets / 4 + 2 + $size_checksum},
+                    {($size_buckets / 4 + 2 + $size_checksum) * 2 + 2}
+                >
+            {
+            }
+            impl ConstrainedVerboseFuzzyHashParams
                 for VerboseFuzzyHashParams<
                     {$size_checksum},
                     {$size_buckets / 4},
