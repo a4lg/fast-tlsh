@@ -5,7 +5,10 @@
 #![doc = include_str!("_docs/readme.md")]
 // no_std
 #![cfg_attr(not(any(test, doc, feature = "std")), no_std)]
+// Allow using internal features when use of Nightly Rust features are allowed.
+#![cfg_attr(feature = "unstable", allow(internal_features))]
 // Regular nightly features
+#![cfg_attr(feature = "unstable", feature(core_intrinsics))]
 #![cfg_attr(feature = "unstable", feature(coverage_attribute))]
 #![cfg_attr(feature = "unstable", feature(doc_cfg))]
 #![cfg_attr(feature = "unstable", feature(likely_unlikely))]
