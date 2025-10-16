@@ -1,6 +1,6 @@
 [workspace]
 members = ["fast-tlsh", "fast-tlsh/serde-tests"]
-resolver = "2"
+resolver = "3"
 
 [profile.release]
 opt-level = 3
