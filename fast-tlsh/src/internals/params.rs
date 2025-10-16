@@ -3,8 +3,8 @@
 
 //! The TLSH parameters.
 
-use crate::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::hash::checksum::{CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL};
+use crate::internals::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::{FuzzyHashType, GeneratorType};
 
 /// The private part.

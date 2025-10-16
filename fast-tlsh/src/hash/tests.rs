@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! Tests: [`crate::hash`].
 
@@ -9,9 +9,9 @@ use super::{ComparisonConfiguration, HexStringPrefix};
 
 use core::str::FromStr;
 
-use crate::buckets::NUM_BUCKETS_SHORT;
 use crate::errors::{OperationError, ParseError};
 use crate::hashes;
+use crate::internals::buckets::NUM_BUCKETS_SHORT;
 use crate::length::ENCODED_VALUE_SIZE;
 use crate::FuzzyHashType;
 

@@ -6,10 +6,12 @@
 
 use core::ops::RangeInclusive;
 
-use crate::buckets::constrained::{FuzzyHashBucketMapper, FuzzyHashBucketsInfo};
-use crate::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::compare::dist_length::{distance, MAX_DISTANCE};
 use crate::errors::ParseError;
+use crate::internals::buckets::{
+    FuzzyHashBucketMapper, FuzzyHashBucketsInfo, NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL,
+    NUM_BUCKETS_SHORT,
+};
 #[allow(unused_imports)]
 use crate::internals::macros::{invariant, optionally_unsafe};
 use crate::internals::parse::hex_str::decode_rev_1;

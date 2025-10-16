@@ -10,10 +10,12 @@ use super::{ConstrainedFuzzyHashType, GeneratorOptions, GeneratorType, WINDOW_SI
 use core::fmt::Debug;
 use core::str::FromStr;
 
-use crate::buckets::constrained::{FuzzyHashBucketMapper, FuzzyHashBucketsInfo};
-use crate::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::errors::{GeneratorError, GeneratorErrorCategory};
 use crate::hashes;
+use crate::internals::buckets::{
+    FuzzyHashBucketMapper, FuzzyHashBucketsInfo, NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL,
+    NUM_BUCKETS_SHORT,
+};
 use crate::length::{
     ConstrainedLengthProcessingInfo, DataLengthProcessingMode, LengthProcessingInfo,
 };

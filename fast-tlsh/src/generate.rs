@@ -4,13 +4,14 @@
 
 //! The fuzzy hash generator.
 
-use crate::buckets::constrained::{FuzzyHashBucketMapper, FuzzyHashBucketsInfo};
-use crate::buckets::FuzzyHashBucketsData;
 use crate::errors::GeneratorError;
 use crate::hash::body::{FuzzyHashBody, FuzzyHashBodyData};
 use crate::hash::checksum::inner::InnerChecksum;
 use crate::hash::checksum::{FuzzyHashChecksum, FuzzyHashChecksumData};
 use crate::hash::qratios::FuzzyHashQRatios;
+use crate::internals::buckets::{
+    FuzzyHashBucketMapper, FuzzyHashBucketsData, FuzzyHashBucketsInfo,
+};
 use crate::internals::intrinsics::{likely, unlikely};
 use crate::internals::macros::{invariant, optionally_unsafe};
 use crate::internals::params::{

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! Tests: [`crate::length`].
 
@@ -11,9 +11,11 @@ use super::{
     ENCODED_VALUE_SIZE, TOP_VALUE_BY_ENCODING,
 };
 
-use crate::buckets::constrained::{FuzzyHashBucketMapper, FuzzyHashBucketsInfo};
-use crate::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::errors::ParseError;
+use crate::internals::buckets::{
+    FuzzyHashBucketMapper, FuzzyHashBucketsInfo, NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL,
+    NUM_BUCKETS_SHORT,
+};
 
 #[test]
 fn len_prerequisites() {

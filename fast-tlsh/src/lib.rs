@@ -61,7 +61,6 @@ extern crate alloc;
 mod internals;
 
 pub mod _docs;
-pub mod buckets;
 mod compare;
 mod errors;
 pub mod generate;
@@ -144,6 +143,11 @@ pub mod prelude {
 
     pub use super::Tlsh;
     pub use super::{TlshGenerator, TlshGeneratorFor};
+}
+
+/// The TLSH bucket constants.
+pub mod buckets {
+    pub use crate::internals::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 }
 
 pub mod hashes;

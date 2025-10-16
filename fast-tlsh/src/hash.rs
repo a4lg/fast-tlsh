@@ -283,9 +283,9 @@ pub(crate) mod public {
 pub(crate) mod inner {
     use super::*;
 
-    use crate::buckets::constrained::{FuzzyHashBucketMapper, FuzzyHashBucketsInfo};
     use crate::hash::body::FuzzyHashBodyData;
     use crate::hash::checksum::FuzzyHashChecksumData;
+    use crate::internals::buckets::{FuzzyHashBucketMapper, FuzzyHashBucketsInfo};
     use crate::internals::macros::{invariant, optionally_unsafe};
     use crate::internals::params::{ConstrainedVerboseFuzzyHashParams, VerboseFuzzyHashParams};
     #[cfg(not(feature = "opt-simd-convert-hex"))]

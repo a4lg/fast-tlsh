@@ -5,9 +5,9 @@
 
 #![cfg(test)]
 
-use crate::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::hash::checksum::{FuzzyHashChecksum, CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL};
 use crate::hashes;
+use crate::internals::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::FuzzyHashType;
 
 #[rustfmt::skip]
