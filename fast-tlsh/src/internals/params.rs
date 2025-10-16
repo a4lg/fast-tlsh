@@ -26,7 +26,7 @@ pub struct FuzzyHashParams<const SIZE_CKSUM: usize, const SIZE_BUCKETS: usize>;
 /// A marker trait to represent all automatically implemented traits.
 pub trait AutomaticTraits: Send + Sync + Unpin + UnwindSafe + RefUnwindSafe {}
 #[cfg(not(feature = "unstable"))]
-impl<T: Send + Sync + Unpin + UnwindSafe + RefUnwindSafe> AutomaticTraits for T {}
+impl<T: ?Sized + Send + Sync + Unpin + UnwindSafe + RefUnwindSafe> AutomaticTraits for T {}
 
 #[cfg(feature = "unstable")]
 /// A marker trait to represent all automatically implemented traits.
@@ -35,8 +35,8 @@ pub trait AutomaticTraits:
 {
 }
 #[cfg(feature = "unstable")]
-impl<T: Send + Sync + Unpin + UnwindSafe + RefUnwindSafe + core::marker::Freeze> AutomaticTraits
-    for T
+impl<T: ?Sized + Send + Sync + Unpin + UnwindSafe + RefUnwindSafe + core::marker::Freeze>
+    AutomaticTraits for T
 {
 }
 
