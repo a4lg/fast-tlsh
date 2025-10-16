@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 // SPDX-FileCopyrightText: Copyright 2013 Trend Micro Incorporated
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! The fuzzy hash and its parts (unless a part has its own module).
 
@@ -286,7 +286,7 @@ pub(crate) mod inner {
     use crate::buckets::constrained::{FuzzyHashBucketMapper, FuzzyHashBucketsInfo};
     use crate::hash::body::FuzzyHashBodyData;
     use crate::hash::checksum::FuzzyHashChecksumData;
-    use crate::macros::{invariant, optionally_unsafe};
+    use crate::internals::macros::{invariant, optionally_unsafe};
     use crate::params::{ConstrainedVerboseFuzzyHashParams, VerboseFuzzyHashParams};
     #[cfg(not(feature = "opt-simd-convert-hex"))]
     use crate::parse::hex_str::encode_array;

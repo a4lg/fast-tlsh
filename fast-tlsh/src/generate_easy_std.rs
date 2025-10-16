@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! The easy wrapper for generator functionalities (for `std` environment).
 
@@ -11,7 +11,7 @@ use std::path::Path;
 
 use crate::errors::GeneratorOrIOError;
 use crate::generate::Generator;
-use crate::macros::{invariant, optionally_unsafe};
+use crate::internals::macros::{invariant, optionally_unsafe};
 use crate::params::ConstrainedFuzzyHashType;
 use crate::{GeneratorType, Tlsh};
 

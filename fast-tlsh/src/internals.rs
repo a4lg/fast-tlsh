@@ -4,4 +4,5 @@
 //! The internal module: Root.
 
 pub(crate) mod intrinsics;
+pub(crate) mod macros;
 pub(crate) mod pearson;

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 // SPDX-FileCopyrightText: Copyright 2013 Trend Micro Incorporated
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! Data length encodings and other handlings.
 
@@ -11,7 +11,7 @@ use crate::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::compare::dist_length::{distance, MAX_DISTANCE};
 use crate::errors::ParseError;
 #[allow(unused_imports)]
-use crate::macros::{invariant, optionally_unsafe};
+use crate::internals::macros::{invariant, optionally_unsafe};
 use crate::parse::hex_str::decode_rev_1;
 
 /// The private part.

@@ -12,11 +12,11 @@ use crate::hash::checksum::inner::InnerChecksum;
 use crate::hash::checksum::{FuzzyHashChecksum, FuzzyHashChecksumData};
 use crate::hash::qratios::FuzzyHashQRatios;
 use crate::internals::intrinsics::{likely, unlikely};
+use crate::internals::macros::{invariant, optionally_unsafe};
 use crate::length::{
     ConstrainedLengthProcessingInfo, DataLengthProcessingMode, DataLengthValidity,
     FuzzyHashLengthEncoding, LengthProcessingInfo,
 };
-use crate::macros::{invariant, optionally_unsafe};
 use crate::params::{
     ConstrainedFuzzyHashParams, ConstrainedFuzzyHashType, ConstrainedVerboseFuzzyHashParams,
     VerboseFuzzyHashParams,

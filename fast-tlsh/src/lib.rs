@@ -68,7 +68,6 @@ pub mod generate;
 pub mod hash;
 pub mod hashes;
 pub mod length;
-mod macros;
 mod params;
 mod parse;
 
