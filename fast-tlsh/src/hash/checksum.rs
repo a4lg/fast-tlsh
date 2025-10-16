@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! The checksum part of the fuzzy hash.
 
@@ -9,8 +9,8 @@ use crate::buckets::constrained::{
 use crate::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::compare::dist_checksum::{distance_1, distance_3};
 use crate::errors::ParseError;
+use crate::internals::pearson::tlsh_b_mapping_256;
 use crate::parse::hex_str::decode_rev_array;
-use crate::pearson::tlsh_b_mapping_256;
 
 /// The length of the normal (1-byte) checksum.
 pub const CHECKSUM_SIZE_NORMAL: usize = 1;

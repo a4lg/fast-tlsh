@@ -60,6 +60,8 @@
 #[cfg(any(feature = "alloc", test, doc))]
 extern crate alloc;
 
+mod internals;
+
 pub mod _docs;
 pub mod buckets;
 mod compare;
@@ -72,7 +74,6 @@ pub mod length;
 mod macros;
 mod params;
 mod parse;
-mod pearson;
 
 mod compare_easy;
 mod generate_easy;

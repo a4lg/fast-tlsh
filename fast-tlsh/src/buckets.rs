@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 // SPDX-FileCopyrightText: Copyright 2013 Trend Micro Incorporated
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! The TLSH buckets and their mappings.
 
 use crate::buckets::constrained::{FuzzyHashBucketMapper, FuzzyHashBucketsInfo};
 use crate::generate::bucket_aggregation;
 use crate::hash::body::{BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT};
-use crate::pearson::{tlsh_b_mapping_256, tlsh_b_mapping_48};
+use crate::internals::pearson::{tlsh_b_mapping_256, tlsh_b_mapping_48};
 
 /// The effective number of buckets on the short variant (with 48 buckets).
 ///
