@@ -87,7 +87,7 @@ pub enum GeneratorError {
     /// The input data is too small to process.
     ///
     /// Whether the input data is too small is normally determined by the value
-    /// of [`DataLengthProcessingMode`](crate::length::DataLengthProcessingMode).
+    /// of [`DataLengthProcessingMode`](crate::DataLengthProcessingMode).
     ///
     /// If we prefer compatibility with the original TLSH implementation,
     /// we cannot generate a fuzzy hash from the data smaller than 50 bytes.

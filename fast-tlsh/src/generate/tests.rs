@@ -16,7 +16,7 @@ use crate::internals::buckets::{
     NUM_BUCKETS_SHORT,
 };
 use crate::internals::errors::{GeneratorError, GeneratorErrorCategory};
-use crate::length::{
+use crate::internals::length::{
     ConstrainedLengthProcessingInfo, DataLengthProcessingMode, LengthProcessingInfo,
 };
 use crate::{Tlsh, TlshGenerator, TlshGeneratorFor};
@@ -299,7 +299,7 @@ fn min_lengths() {
 #[test]
 fn max_lengths() {
     fn check<F: ConstrainedFuzzyHashType>() {
-        assert_eq!(TlshGeneratorFor::<F>::MAX, crate::length::MAX);
+        assert_eq!(TlshGeneratorFor::<F>::MAX, crate::internals::length::MAX);
     }
     check::<hashes::Short>();
     check::<hashes::Normal>();

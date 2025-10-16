@@ -17,8 +17,8 @@ use crate::hash::checksum::FuzzyHashChecksum;
 use crate::hash::qratios::FuzzyHashQRatios;
 use crate::internals::compare::ComparisonConfiguration;
 use crate::internals::errors::{OperationError, ParseError};
+use crate::internals::length::FuzzyHashLengthEncoding;
 use crate::internals::params::{ConstrainedFuzzyHashParams, FuzzyHashParams};
-use crate::length::FuzzyHashLengthEncoding;
 use crate::FuzzyHashType;
 
 pub mod body;

@@ -12,7 +12,7 @@ use core::str::FromStr;
 use crate::hashes;
 use crate::internals::buckets::NUM_BUCKETS_SHORT;
 use crate::internals::errors::{OperationError, ParseError};
-use crate::length::ENCODED_VALUE_SIZE;
+use crate::internals::length::ENCODED_VALUE_SIZE;
 use crate::FuzzyHashType;
 
 #[test]

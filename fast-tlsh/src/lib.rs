@@ -63,7 +63,6 @@ mod internals;
 pub mod _docs;
 pub mod generate;
 pub mod hash;
-pub mod length;
 
 mod compare_easy;
 mod generate_easy;
@@ -87,7 +86,7 @@ pub use hash::HexStringPrefix;
 pub use internals::compare::ComparisonConfiguration;
 pub use internals::errors::{GeneratorError, GeneratorErrorCategory};
 pub use internals::errors::{OperationError, ParseError};
-pub use length::DataLengthProcessingMode;
+pub use internals::length::DataLengthProcessingMode;
 
 #[cfg(all(feature = "easy-functions", feature = "std"))]
 pub use internals::errors::GeneratorOrIOError;
@@ -149,5 +148,13 @@ pub mod buckets {
 }
 
 pub mod hashes;
+
+/// Data length encodings and other handlings.
+pub mod length {
+    pub use crate::internals::length::{
+        ConstrainedLengthProcessingInfo, DataLengthValidity,
+        FuzzyHashLengthEncoding, LengthProcessingInfo, ENCODED_VALUE_SIZE,
+    };
+}
 
 mod tests;

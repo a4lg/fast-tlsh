@@ -13,14 +13,14 @@ use crate::internals::buckets::{
 };
 use crate::internals::errors::GeneratorError;
 use crate::internals::intrinsics::{likely, unlikely};
+use crate::internals::length::{
+    ConstrainedLengthProcessingInfo, DataLengthProcessingMode, DataLengthValidity,
+    FuzzyHashLengthEncoding, LengthProcessingInfo,
+};
 use crate::internals::macros::{invariant, optionally_unsafe};
 use crate::internals::params::{
     ConstrainedFuzzyHashParams, ConstrainedFuzzyHashType, ConstrainedVerboseFuzzyHashParams,
     VerboseFuzzyHashParams,
-};
-use crate::length::{
-    ConstrainedLengthProcessingInfo, DataLengthProcessingMode, DataLengthValidity,
-    FuzzyHashLengthEncoding, LengthProcessingInfo,
 };
 use crate::{FuzzyHashType, GeneratorType};
 
@@ -120,8 +120,7 @@ impl GeneratorOptions {
     /// ```
     /// use core::str::FromStr;
     /// use tlsh::prelude::*;
-    /// use tlsh::{GeneratorErrorCategory, GeneratorOptions};
-    /// use tlsh::length::DataLengthProcessingMode;
+    /// use tlsh::{DataLengthProcessingMode, GeneratorErrorCategory, GeneratorOptions};
     ///
     /// let mut generator = TlshGenerator::new();
     ///
