@@ -3,6 +3,8 @@
 
 //! The Q ratio pair part of the fuzzy hash.
 
+#![allow(clippy::double_parens)] // TODO: Remove if bitfield-struct is fixed.
+
 use crate::internals::compare::dist_qratios::{MAX_DISTANCE, distance};
 use crate::internals::errors::ParseError;
 use crate::internals::parse::hex_str::decode_rev_1;
