@@ -14,3 +14,4 @@ pub(crate) mod macros;
 pub(crate) mod params;
 pub(crate) mod parse;
 pub(crate) mod pearson;
+pub(crate) mod utils;
