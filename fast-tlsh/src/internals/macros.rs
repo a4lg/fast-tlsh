@@ -43,18 +43,7 @@ macro_rules! optionally_unsafe_impl {
 /// Declare an invariant for optimization.
 ///
 /// When the feature `unsafe` is disabled, it only places [`debug_assert!()`].
-/// If both `unsafe` and `unstable` are enabled, [`core::intrinsics::assume()`]
-/// is used (which requires the `core_intrinsics` Rust unstable feature).
-/// If only the `unsafe` feature is enabled,
-/// [`core::hint::unreachable_unchecked()`] is used.
-///
-/// If `unsafe` and `unstable` are enabled, enable unstable `core_intrinsics`
-/// feature.
-///
-/// The difference is, since `unsafe` (without `unstable`) implementation uses
-/// plain `if` statement, non-intuitive expression may appear in the code (on
-/// the other hand, [`core::intrinsics::assume()`] guarantees that it does not
-/// emit any code).
+/// If `unsafe` is enabled, [`core::hint::assert_unchecked()`] is used.
 ///
 /// Optimization behaviors are disabled on tests.
 ///
@@ -63,12 +52,8 @@ macro_rules! optionally_unsafe_impl {
 macro_rules! invariant_impl {
     ($expr: expr) => {
         cfg_if::cfg_if! {
-            if #[cfg(all(feature = "unsafe", feature = "unstable", not(test)))] {
-                core::intrinsics::assume($expr);
-            } else if #[cfg(all(feature = "unsafe", not(test)))] {
-                if !($expr) {
-                    core::hint::unreachable_unchecked();
-                }
+            if #[cfg(all(feature = "unsafe", not(test)))] {
+                core::hint::assert_unchecked($expr);
             } else {
                 debug_assert!($expr);
             }
