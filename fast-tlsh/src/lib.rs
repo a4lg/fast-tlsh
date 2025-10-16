@@ -63,11 +63,8 @@ extern crate alloc;
 pub mod _docs;
 pub mod buckets;
 mod compare;
-mod compare_easy;
 mod errors;
 pub mod generate;
-mod generate_easy;
-mod generate_easy_std;
 pub mod hash;
 pub mod hashes;
 mod intrinsics;
@@ -76,6 +73,10 @@ mod macros;
 mod params;
 mod parse;
 mod pearson;
+
+mod compare_easy;
+mod generate_easy;
+mod generate_easy_std;
 
 // Easy function re-exports
 #[cfg(feature = "easy-functions")]
