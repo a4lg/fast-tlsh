@@ -14,6 +14,7 @@
         all(not(target_feature = "avx2"), target_feature = "sse4.1")
     )
 ))]
+#![allow(unsafe_op_in_unsafe_fn)]
 
 #[cfg(target_arch = "x86")]
 use core::arch::x86::*;

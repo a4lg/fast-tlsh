@@ -2,8 +2,8 @@
 name = "fast-tlsh-serde-tests"
 version = "0.2.0"
 license = "Apache-2.0 OR MIT"
-edition = "2021"
-rust-version = "1.70"
+edition = "2024"
+rust-version = "1.85"
 workspace = "../.."
 publish = false
 

@@ -11,6 +11,7 @@
     target_arch = "wasm32",
     any(doc, target_feature = "simd128")
 ))]
+#![allow(unsafe_op_in_unsafe_fn)]
 
 #[cfg(target_arch = "wasm32")]
 use core::arch::wasm32::*;

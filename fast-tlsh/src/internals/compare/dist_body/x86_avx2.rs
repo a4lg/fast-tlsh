@@ -11,6 +11,7 @@
     any(target_arch = "x86", target_arch = "x86_64"),
     any(feature = "detect-features", target_feature = "avx2")
 ))]
+#![allow(unsafe_op_in_unsafe_fn)]
 
 #[cfg(target_arch = "x86")]
 use core::arch::x86::*;

@@ -9,9 +9,9 @@ homepage = "https://github.com/a4lg/fast-tlsh"
 repository = "https://github.com/a4lg/fast-tlsh"
 documentation = "https://docs.rs/fast-tlsh"
 license = "Apache-2.0 OR MIT"
-edition = "2021"
+edition = "2024"
 readme = "../README.md"
-rust-version = "1.70"
+rust-version = "1.85"
 workspace = ".."
 
 [lib]
