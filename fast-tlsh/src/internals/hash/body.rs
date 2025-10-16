@@ -97,17 +97,24 @@ impl<const SIZE_BODY: usize> FuzzyHashBodyData<SIZE_BODY> {
     }
 }
 
+/// Template for [`FuzzyHashBody::quartile()`]
+macro_rules! quartile_template {
+    () => {
+        #[inline(always)]
+        fn quartile(&self, index: usize) -> u8 {
+            assert!(index < Self::NUM_BUCKETS);
+            (self.data[self.data.len() - 1 - index / 4] >> (2 * (index % 4))) & 0b11
+        }
+    };
+}
+
 // Short (48 bucket) body implementation
 impl Sealed for FuzzyHashBodyData<BODY_SIZE_SHORT> {}
 impl FuzzyHashBody for FuzzyHashBodyData<BODY_SIZE_SHORT> {
     const NUM_BUCKETS: usize = NUM_BUCKETS_SHORT;
     const SIZE: usize = BODY_SIZE_SHORT;
     const MAX_DISTANCE: u32 = MAX_DISTANCE_SHORT;
-    #[inline(always)]
-    fn quartile(&self, index: usize) -> u8 {
-        assert!(index < Self::NUM_BUCKETS);
-        (self.data[self.data.len() - 1 - index / 4] >> (2 * (index % 4))) & 0b11
-    }
+    quartile_template!();
     #[inline(always)]
     fn compare(&self, other: &Self) -> u32 {
         distance_12(&self.data, &other.data)
@@ -120,11 +127,7 @@ impl FuzzyHashBody for FuzzyHashBodyData<BODY_SIZE_NORMAL> {
     const NUM_BUCKETS: usize = NUM_BUCKETS_NORMAL;
     const SIZE: usize = BODY_SIZE_NORMAL;
     const MAX_DISTANCE: u32 = MAX_DISTANCE_NORMAL;
-    #[inline(always)]
-    fn quartile(&self, index: usize) -> u8 {
-        assert!(index < Self::NUM_BUCKETS);
-        (self.data[self.data.len() - 1 - index / 4] >> (2 * (index % 4))) & 0b11
-    }
+    quartile_template!();
     #[inline(always)]
     fn compare(&self, other: &Self) -> u32 {
         distance_32(&self.data, &other.data)
@@ -137,11 +140,7 @@ impl FuzzyHashBody for FuzzyHashBodyData<BODY_SIZE_LONG> {
     const NUM_BUCKETS: usize = NUM_BUCKETS_LONG;
     const SIZE: usize = BODY_SIZE_LONG;
     const MAX_DISTANCE: u32 = MAX_DISTANCE_LONG;
-    #[inline(always)]
-    fn quartile(&self, index: usize) -> u8 {
-        assert!(index < Self::NUM_BUCKETS);
-        (self.data[self.data.len() - 1 - index / 4] >> (2 * (index % 4))) & 0b11
-    }
+    quartile_template!();
     #[inline(always)]
     fn compare(&self, other: &Self) -> u32 {
         distance_64(&self.data, &other.data)
