@@ -9,8 +9,8 @@ use crate::buckets::constrained::{
 use crate::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::compare::dist_checksum::{distance_1, distance_3};
 use crate::errors::ParseError;
+use crate::internals::parse::hex_str::decode_rev_array;
 use crate::internals::pearson::tlsh_b_mapping_256;
-use crate::parse::hex_str::decode_rev_array;
 
 /// The length of the normal (1-byte) checksum.
 pub const CHECKSUM_SIZE_NORMAL: usize = 1;

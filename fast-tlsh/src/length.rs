@@ -12,7 +12,7 @@ use crate::compare::dist_length::{distance, MAX_DISTANCE};
 use crate::errors::ParseError;
 #[allow(unused_imports)]
 use crate::internals::macros::{invariant, optionally_unsafe};
-use crate::parse::hex_str::decode_rev_1;
+use crate::internals::parse::hex_str::decode_rev_1;
 
 /// The private part.
 mod private {

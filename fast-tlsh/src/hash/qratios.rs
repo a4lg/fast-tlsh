@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! The Q ratio pair part of the fuzzy hash.
 
 use crate::compare::dist_qratios::{distance, MAX_DISTANCE};
 use crate::errors::ParseError;
-use crate::parse::hex_str::decode_rev_1;
+use crate::internals::parse::hex_str::decode_rev_1;
 
 /// Inner Q ratio pair struct.
 #[bitfield_struct::bitfield(u8, order = Lsb)]

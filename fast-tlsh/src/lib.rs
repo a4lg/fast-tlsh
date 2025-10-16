@@ -69,7 +69,6 @@ pub mod hash;
 pub mod hashes;
 pub mod length;
 mod params;
-mod parse;
 
 mod compare_easy;
 mod generate_easy;

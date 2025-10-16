@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! The body part of the fuzzy hash.
 
@@ -11,7 +11,7 @@ use crate::compare::dist_body::{
 use crate::errors::ParseError;
 
 #[cfg(not(feature = "opt-simd-parse-hex"))]
-use crate::parse::hex_str::decode_array;
+use crate::internals::parse::hex_str::decode_array;
 
 /// The body size of the short variant (with 48 effective buckets).
 ///

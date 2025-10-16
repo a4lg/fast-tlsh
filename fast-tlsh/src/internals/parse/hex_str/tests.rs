@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
-//! Tests: [`crate::parse::hex_str`].
+//! Tests: [`crate::internals::parse::hex_str`].
 
 #![cfg(test)]
 
@@ -18,7 +18,7 @@ use super::{HexDecodeTableType, HEX_INVALID, HEX_REV_TABLE_LO};
 use std::collections::hash_map::Entry;
 use std::collections::HashMap;
 
-use crate::parse::bits::swap_nibble_in_u8;
+use crate::internals::parse::bits::swap_nibble_in_u8;
 
 #[test]
 fn hex_table_examples() {

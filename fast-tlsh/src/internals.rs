@@ -5,4 +5,5 @@
 
 pub(crate) mod intrinsics;
 pub(crate) mod macros;
+pub(crate) mod parse;
 pub(crate) mod pearson;
