@@ -8,10 +8,10 @@
 // Allow using internal features when use of Nightly Rust features are allowed.
 #![cfg_attr(feature = "unstable", allow(internal_features))]
 // Regular nightly features
-#![cfg_attr(feature = "unstable", feature(doc_cfg))]
-#![cfg_attr(feature = "unstable", feature(doc_auto_cfg))]
 #![cfg_attr(feature = "unstable", feature(core_intrinsics))]
 #![cfg_attr(feature = "unstable", feature(coverage_attribute))]
+#![cfg_attr(feature = "unstable", feature(doc_cfg))]
+#![cfg_attr(feature = "unstable", feature(doc_auto_cfg))]
 #![cfg_attr(feature = "unstable", feature(portable_simd))]
 #![cfg_attr(
     all(feature = "unstable", target_arch = "arm"),
