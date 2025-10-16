@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! Tests: [`crate::generate`].
 
@@ -296,8 +296,7 @@ fn min_lengths() {
 
 #[test]
 fn max_lengths() {
-    fn check<F: ConstrainedFuzzyHashType>()
-    {
+    fn check<F: ConstrainedFuzzyHashType>() {
         assert_eq!(TlshGeneratorFor::<F>::MAX, crate::length::MAX);
     }
     check::<hashes::Short>();
