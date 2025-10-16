@@ -31,8 +31,7 @@ pub const fn distance_on_ring_mod(x: u8, y: u8, n: u8) -> u8 {
 }
 
 /// The generic implementation.
-#[cfg(any(doc, test))]
-#[cfg_attr(feature = "unstable", doc(cfg(all())))]
+#[cfg(test)]
 pub(crate) mod generic {
     use core::num::Wrapping;
     use num_traits::Unsigned;
