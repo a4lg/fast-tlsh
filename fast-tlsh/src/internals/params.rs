@@ -3,6 +3,8 @@
 
 //! The TLSH parameters.
 
+use core::panic::{RefUnwindSafe, UnwindSafe};
+
 use crate::internals::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::internals::hash::checksum::{CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL};
 use crate::{FuzzyHashType, GeneratorType};
@@ -20,19 +22,43 @@ mod private {
 /// A marker struct for fuzzy hashing parameters.
 pub struct FuzzyHashParams<const SIZE_CKSUM: usize, const SIZE_BUCKETS: usize>;
 
+#[cfg(not(feature = "unstable"))]
+/// A marker trait to represent all automatically implemented traits.
+pub trait AutomaticTraits: Send + Sync + Unpin + UnwindSafe + RefUnwindSafe {}
+#[cfg(not(feature = "unstable"))]
+impl<T: Send + Sync + Unpin + UnwindSafe + RefUnwindSafe> AutomaticTraits for T {}
+
+#[cfg(feature = "unstable")]
+/// A marker trait to represent all automatically implemented traits.
+pub trait AutomaticTraits:
+    Send + Sync + Unpin + UnwindSafe + RefUnwindSafe + core::marker::Freeze
+{
+}
+#[cfg(feature = "unstable")]
+impl<T: Send + Sync + Unpin + UnwindSafe + RefUnwindSafe + core::marker::Freeze> AutomaticTraits
+    for T
+{
+}
+
 /// An adapter trait for valid fuzzy hashing parameters.
 pub trait ConstrainedFuzzyHashParams: private::SealedParam {
     /// The inner fuzzy hash type used by the public implementation.
     ///
     /// This is an instantiation of
     /// [`FuzzyHash`](crate::internals::hash::FuzzyHash).
+    ///
+    /// To prevent negative implementation of automatic traits due to
+    /// heavy indirection (although being only a documentation issue),
+    /// this member constrains that the inner fuzzy hash type implements
+    /// all automatic traits.
     type InnerFuzzyHashType: FuzzyHashType
         + core::fmt::Debug
         + core::fmt::Display
         + Clone
         + Copy
         + PartialEq
-        + Eq;
+        + Eq
+        + AutomaticTraits;
     /// The inner generator type used by the public implementation.
     ///
     /// This is an instantiation of

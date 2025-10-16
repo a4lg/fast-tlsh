@@ -8,6 +8,7 @@
 // Regular nightly features
 #![cfg_attr(feature = "unstable", feature(coverage_attribute))]
 #![cfg_attr(feature = "unstable", feature(doc_cfg))]
+#![cfg_attr(feature = "unstable", feature(freeze))]
 #![cfg_attr(feature = "unstable", feature(likely_unlikely))]
 #![cfg_attr(feature = "unstable", feature(portable_simd))]
 #![cfg_attr(
