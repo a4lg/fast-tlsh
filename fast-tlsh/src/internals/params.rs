@@ -7,16 +7,13 @@ use core::panic::{RefUnwindSafe, UnwindSafe};
 
 use crate::internals::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
 use crate::internals::hash::checksum::{CHECKSUM_SIZE_LONG, CHECKSUM_SIZE_NORMAL};
+use crate::internals::utils::Sealed;
 use crate::{FuzzyHashType, GeneratorType};
 
 /// The private part.
 mod private {
     /// The sealed trait for verbose parameters.
     pub trait SealedVerboseParam {}
-    /// The sealed trait for parameters.
-    pub trait SealedParam {}
-    /// The sealed trait for constrained fuzzy hashes.
-    pub trait SealedFuzzyHashes {}
 }
 
 /// A marker struct for fuzzy hashing parameters.
@@ -41,7 +38,7 @@ impl<T: ?Sized + Send + Sync + Unpin + UnwindSafe + RefUnwindSafe + core::marker
 }
 
 /// An adapter trait for valid fuzzy hashing parameters.
-pub trait ConstrainedFuzzyHashParams: private::SealedParam {
+pub trait ConstrainedFuzzyHashParams: Sealed {
     /// The inner fuzzy hash type used by the public implementation.
     ///
     /// This is an instantiation of
@@ -71,13 +68,7 @@ pub trait ConstrainedFuzzyHashParams: private::SealedParam {
 
 /// An adapter trait for valid public fuzzy hash types.
 pub trait ConstrainedFuzzyHashType:
-    private::SealedFuzzyHashes
-    + core::fmt::Debug
-    + core::fmt::Display
-    + FuzzyHashType
-    + Clone
-    + PartialEq
-    + Eq
+    Sealed + core::fmt::Debug + core::fmt::Display + FuzzyHashType + Clone + PartialEq + Eq
 {
     /// The parameters corresponding the type.
     type Params: ConstrainedFuzzyHashParams;
@@ -164,10 +155,7 @@ macro_rules! inner_generator_type {
 macro_rules! params {
     {$($name:ident = ($size_checksum:tt, $size_buckets:tt);)*} => {
         $(
-            impl private::SealedParam
-                for FuzzyHashParams<{$size_checksum}, {$size_buckets}>
-            {
-            }
+            impl Sealed for FuzzyHashParams<{$size_checksum}, {$size_buckets}> {}
             impl private::SealedVerboseParam
                 for VerboseFuzzyHashParams<
                     {$size_checksum},
@@ -182,8 +170,7 @@ macro_rules! params {
                 type InnerFuzzyHashType = inner_fuzzy_hash_type!($size_checksum, $size_buckets);
                 type InnerGeneratorType = inner_generator_type!($size_checksum, $size_buckets);
             }
-            impl private::SealedFuzzyHashes
-                for crate::hash::FuzzyHash<{$size_checksum}, {$size_buckets}>
+            impl Sealed for crate::hash::FuzzyHash<{$size_checksum}, {$size_buckets}>
             {
             }
             impl ConstrainedFuzzyHashType for crate::hash::FuzzyHash<{$size_checksum}, {$size_buckets}> {

@@ -11,20 +11,15 @@ use crate::internals::compare::dist_checksum::{distance_1, distance_3};
 use crate::internals::errors::ParseError;
 use crate::internals::parse::hex_str::decode_rev_array;
 use crate::internals::pearson::tlsh_b_mapping_256;
+use crate::internals::utils::Sealed;
 
 /// The length of the normal (1-byte) checksum.
 pub const CHECKSUM_SIZE_NORMAL: usize = 1;
 /// The length of the long (3-byte) checksum.
 pub const CHECKSUM_SIZE_LONG: usize = 3;
 
-/// The private part.
-pub(crate) mod private {
-    /// The sealed trait.
-    pub trait Sealed {}
-}
-
 /// The trait to provide one byte checksum validness checker.
-pub trait OneByteChecksumCheckerType: private::Sealed {
+pub trait OneByteChecksumCheckerType: Sealed {
     /// Returns whether the given checksum value is valid.
     ///
     /// In the default implementation, it is always [`true`] because
@@ -40,7 +35,7 @@ struct OneByteChecksumChecker<const SIZE_BUCKETS: usize>
 where
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper;
 
-impl private::Sealed for OneByteChecksumChecker<NUM_BUCKETS_SHORT> {}
+impl Sealed for OneByteChecksumChecker<NUM_BUCKETS_SHORT> {}
 impl OneByteChecksumCheckerType for OneByteChecksumChecker<NUM_BUCKETS_SHORT> {
     /// Returns whether the given checksum value is valid.
     ///
@@ -50,16 +45,16 @@ impl OneByteChecksumCheckerType for OneByteChecksumChecker<NUM_BUCKETS_SHORT> {
         checksum <= NUM_BUCKETS_SHORT as u8
     }
 }
-impl private::Sealed for OneByteChecksumChecker<NUM_BUCKETS_NORMAL> {}
+impl Sealed for OneByteChecksumChecker<NUM_BUCKETS_NORMAL> {}
 impl OneByteChecksumCheckerType for OneByteChecksumChecker<NUM_BUCKETS_NORMAL> {}
-impl private::Sealed for OneByteChecksumChecker<NUM_BUCKETS_LONG> {}
+impl Sealed for OneByteChecksumChecker<NUM_BUCKETS_LONG> {}
 impl OneByteChecksumCheckerType for OneByteChecksumChecker<NUM_BUCKETS_LONG> {}
 
 /// The trait representing "updating" behavior of the checksum.
 ///
 /// This trait is separate from [`FuzzyHashChecksum`] to expose
 /// read-only part only.
-pub trait FuzzyHashChecksumMut: private::Sealed {
+pub trait FuzzyHashChecksumMut: Sealed {
     /// Update the checksum by the last two bytes in the update window.
     fn update(&mut self, curr: u8, prev: u8);
 }
@@ -148,10 +143,8 @@ where
 }
 
 // Normal variant (1-byte checksum)
-impl<const SIZE_BUCKETS: usize> private::Sealed
-    for FuzzyHashChecksumData<CHECKSUM_SIZE_NORMAL, SIZE_BUCKETS>
-where
-    FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper,
+impl<const SIZE_BUCKETS: usize> Sealed for FuzzyHashChecksumData<CHECKSUM_SIZE_NORMAL, SIZE_BUCKETS> where
+    FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper
 {
 }
 impl<const SIZE_BUCKETS: usize> FuzzyHashChecksumMut
@@ -183,10 +176,8 @@ where
 }
 
 // Long variant (3-byte checksum)
-impl<const SIZE_BUCKETS: usize> private::Sealed
-    for FuzzyHashChecksumData<CHECKSUM_SIZE_LONG, SIZE_BUCKETS>
-where
-    FuzzyHashBucketsInfo<SIZE_BUCKETS>: LongFuzzyHashBucketMapper,
+impl<const SIZE_BUCKETS: usize> Sealed for FuzzyHashChecksumData<CHECKSUM_SIZE_LONG, SIZE_BUCKETS> where
+    FuzzyHashBucketsInfo<SIZE_BUCKETS>: LongFuzzyHashBucketMapper
 {
 }
 impl<const SIZE_BUCKETS: usize> FuzzyHashChecksumMut

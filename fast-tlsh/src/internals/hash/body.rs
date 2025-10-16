@@ -9,6 +9,7 @@ use crate::internals::compare::dist_body::{
     MAX_DISTANCE_SHORT,
 };
 use crate::internals::errors::ParseError;
+use crate::internals::utils::Sealed;
 
 #[cfg(not(feature = "opt-simd-parse-hex"))]
 use crate::internals::parse::hex_str::decode_array;
@@ -31,14 +32,8 @@ pub const BODY_SIZE_NORMAL: usize = NUM_BUCKETS_NORMAL / 4;
 /// [the number of effective buckets](crate::buckets::NUM_BUCKETS_LONG).
 pub const BODY_SIZE_LONG: usize = NUM_BUCKETS_LONG / 4;
 
-/// The private part.
-mod private {
-    /// The sealed trait.
-    pub trait Sealed {}
-}
-
 /// The trait representing the body part of the fuzzy hash.
-pub trait FuzzyHashBody: private::Sealed {
+pub trait FuzzyHashBody: Sealed {
     /// The number of buckets in the body.
     const NUM_BUCKETS: usize;
     /// The size of the body in bytes.
@@ -103,7 +98,7 @@ impl<const SIZE_BODY: usize> FuzzyHashBodyData<SIZE_BODY> {
 }
 
 // Short (48 bucket) body implementation
-impl private::Sealed for FuzzyHashBodyData<BODY_SIZE_SHORT> {}
+impl Sealed for FuzzyHashBodyData<BODY_SIZE_SHORT> {}
 impl FuzzyHashBody for FuzzyHashBodyData<BODY_SIZE_SHORT> {
     const NUM_BUCKETS: usize = NUM_BUCKETS_SHORT;
     const SIZE: usize = BODY_SIZE_SHORT;
@@ -120,7 +115,7 @@ impl FuzzyHashBody for FuzzyHashBodyData<BODY_SIZE_SHORT> {
 }
 
 // Normal (128 bucket) body implementation
-impl private::Sealed for FuzzyHashBodyData<BODY_SIZE_NORMAL> {}
+impl Sealed for FuzzyHashBodyData<BODY_SIZE_NORMAL> {}
 impl FuzzyHashBody for FuzzyHashBodyData<BODY_SIZE_NORMAL> {
     const NUM_BUCKETS: usize = NUM_BUCKETS_NORMAL;
     const SIZE: usize = BODY_SIZE_NORMAL;
@@ -137,7 +132,7 @@ impl FuzzyHashBody for FuzzyHashBodyData<BODY_SIZE_NORMAL> {
 }
 
 // Long (256 bucket) body implementation
-impl private::Sealed for FuzzyHashBodyData<BODY_SIZE_LONG> {}
+impl Sealed for FuzzyHashBodyData<BODY_SIZE_LONG> {}
 impl FuzzyHashBody for FuzzyHashBodyData<BODY_SIZE_LONG> {
     const NUM_BUCKETS: usize = NUM_BUCKETS_LONG;
     const SIZE: usize = BODY_SIZE_LONG;

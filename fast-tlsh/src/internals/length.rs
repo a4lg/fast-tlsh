@@ -15,12 +15,7 @@ use crate::internals::errors::ParseError;
 #[allow(unused_imports)]
 use crate::internals::macros::{invariant, optionally_unsafe};
 use crate::internals::parse::hex_str::decode_rev_1;
-
-/// The private part.
-mod private {
-    /// The sealed trait.
-    pub trait Sealed {}
-}
+use crate::internals::utils::Sealed;
 
 /// The number of valid encoded length values.
 ///
@@ -215,7 +210,7 @@ const TOP_VALUE_BY_ENCODING: [u32; ENCODED_VALUE_SIZE] = [
 pub(crate) const MAX: u32 = TOP_VALUE_BY_ENCODING[TOP_VALUE_BY_ENCODING.len() - 1];
 
 /// Denotes bucket count-specific length constraints.
-pub trait ConstrainedLengthProcessingInfo: private::Sealed {
+pub trait ConstrainedLengthProcessingInfo: Sealed {
     /// The minimum data length (on [all modes](DataLengthProcessingMode)).
     const MIN: u32;
     /// The minimum data length (on [the conservative mode](DataLengthProcessingMode::Conservative)).
@@ -235,7 +230,7 @@ pub struct LengthProcessingInfo<const SIZE_BUCKETS: usize>
 where
     FuzzyHashBucketsInfo<SIZE_BUCKETS>: FuzzyHashBucketMapper;
 // Short (48 bucket) information
-impl private::Sealed for LengthProcessingInfo<NUM_BUCKETS_SHORT> where
+impl Sealed for LengthProcessingInfo<NUM_BUCKETS_SHORT> where
     FuzzyHashBucketsInfo<NUM_BUCKETS_SHORT>: FuzzyHashBucketMapper
 {
 }
@@ -247,7 +242,7 @@ where
     const MIN_CONSERVATIVE: u32 = 10;
 }
 // Normal (128 bucket) information
-impl private::Sealed for LengthProcessingInfo<NUM_BUCKETS_NORMAL> where
+impl Sealed for LengthProcessingInfo<NUM_BUCKETS_NORMAL> where
     FuzzyHashBucketsInfo<NUM_BUCKETS_NORMAL>: FuzzyHashBucketMapper
 {
 }
@@ -259,7 +254,7 @@ where
     const MIN_CONSERVATIVE: u32 = 128;
 }
 // Long (256 bucket) information
-impl private::Sealed for LengthProcessingInfo<NUM_BUCKETS_LONG> where
+impl Sealed for LengthProcessingInfo<NUM_BUCKETS_LONG> where
     FuzzyHashBucketsInfo<NUM_BUCKETS_LONG>: FuzzyHashBucketMapper
 {
 }

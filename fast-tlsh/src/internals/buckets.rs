@@ -7,6 +7,7 @@
 use crate::internals::generate::bucket_aggregation;
 use crate::internals::hash::body::{BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT};
 use crate::internals::pearson::{tlsh_b_mapping_256, tlsh_b_mapping_48};
+use crate::internals::utils::Sealed;
 
 /// The effective number of buckets on the short variant (with 48 buckets).
 ///
@@ -37,14 +38,8 @@ static_assertions::const_assert_eq!(NUM_BUCKETS_SHORT % 4, 0);
 static_assertions::const_assert_eq!(NUM_BUCKETS_NORMAL % 4, 0);
 static_assertions::const_assert_eq!(NUM_BUCKETS_LONG % 4, 0);
 
-/// The private part.
-mod private {
-    /// The sealed trait.
-    pub trait Sealed {}
-}
-
 /// The trait to represent a bucket mapping.
-pub trait FuzzyHashBucketMapper: private::Sealed {
+pub trait FuzzyHashBucketMapper: Sealed {
     /// Raw bucket array type.
     type RawBucketType;
     /// Raw body type.
@@ -79,7 +74,7 @@ pub trait FuzzyHashBucketMapper: private::Sealed {
 pub struct FuzzyHashBucketsInfo<const SIZE_BUCKETS: usize>;
 
 // Short (48 bucket) bucket mapping implementation
-impl private::Sealed for FuzzyHashBucketsInfo<NUM_BUCKETS_SHORT> {}
+impl Sealed for FuzzyHashBucketsInfo<NUM_BUCKETS_SHORT> {}
 impl FuzzyHashBucketMapper for FuzzyHashBucketsInfo<NUM_BUCKETS_SHORT> {
     type RawBucketType = [u32; NUM_BUCKETS_SHORT];
     type RawBodyType = [u8; BODY_SIZE_SHORT];
@@ -102,7 +97,7 @@ impl FuzzyHashBucketMapper for FuzzyHashBucketsInfo<NUM_BUCKETS_SHORT> {
 }
 
 // Normal (128 bucket) bucket mapping implementation
-impl private::Sealed for FuzzyHashBucketsInfo<NUM_BUCKETS_NORMAL> {}
+impl Sealed for FuzzyHashBucketsInfo<NUM_BUCKETS_NORMAL> {}
 impl FuzzyHashBucketMapper for FuzzyHashBucketsInfo<NUM_BUCKETS_NORMAL> {
     type RawBucketType = [u32; NUM_BUCKETS_NORMAL];
     type RawBodyType = [u8; BODY_SIZE_NORMAL];
@@ -126,7 +121,7 @@ impl FuzzyHashBucketMapper for FuzzyHashBucketsInfo<NUM_BUCKETS_NORMAL> {
 }
 
 // Long (256 bucket) bucket mapping implementation
-impl private::Sealed for FuzzyHashBucketsInfo<NUM_BUCKETS_LONG> {}
+impl Sealed for FuzzyHashBucketsInfo<NUM_BUCKETS_LONG> {}
 impl FuzzyHashBucketMapper for FuzzyHashBucketsInfo<NUM_BUCKETS_LONG> {
     type RawBucketType = [u32; NUM_BUCKETS_LONG];
     type RawBodyType = [u8; BODY_SIZE_LONG];
