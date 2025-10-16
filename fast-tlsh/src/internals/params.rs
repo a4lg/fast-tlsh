@@ -3,6 +3,7 @@
 
 //! The TLSH parameters.
 
+use core::fmt::{Debug, Display};
 use core::panic::{RefUnwindSafe, UnwindSafe};
 
 use crate::internals::buckets::{NUM_BUCKETS_LONG, NUM_BUCKETS_NORMAL, NUM_BUCKETS_SHORT};
@@ -43,8 +44,8 @@ pub trait ConstrainedFuzzyHashParams: Sealed {
     /// this member constrains that the inner fuzzy hash type implements
     /// all automatic traits.
     type InnerFuzzyHashType: FuzzyHashType
-        + core::fmt::Debug
-        + core::fmt::Display
+        + Debug
+        + Display
         + Clone
         + Copy
         + PartialEq
@@ -55,14 +56,14 @@ pub trait ConstrainedFuzzyHashParams: Sealed {
     /// This is an instantiation of
     /// [`Generator`](crate::internals::generate::Generator).
     type InnerGeneratorType: GeneratorType<Output = Self::InnerFuzzyHashType>
-        + core::fmt::Debug
+        + Debug
         + Default
         + Clone;
 }
 
 /// An adapter trait for valid public fuzzy hash types.
 pub trait ConstrainedFuzzyHashType:
-    Sealed + core::fmt::Debug + core::fmt::Display + FuzzyHashType + Clone + PartialEq + Eq
+    Sealed + Debug + Display + FuzzyHashType + Clone + PartialEq + Eq
 {
     /// The parameters corresponding the type.
     type Params: ConstrainedFuzzyHashParams;
