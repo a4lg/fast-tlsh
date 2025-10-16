@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 // SPDX-FileCopyrightText: Copyright 2013 Trend Micro Incorporated
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! The fuzzy hash generator.
 
@@ -11,7 +11,7 @@ use crate::hash::body::{FuzzyHashBody, FuzzyHashBodyData};
 use crate::hash::checksum::inner::InnerChecksum;
 use crate::hash::checksum::{FuzzyHashChecksum, FuzzyHashChecksumData};
 use crate::hash::qratios::FuzzyHashQRatios;
-use crate::intrinsics::{likely, unlikely};
+use crate::internals::intrinsics::{likely, unlikely};
 use crate::length::{
     ConstrainedLengthProcessingInfo, DataLengthProcessingMode, DataLengthValidity,
     FuzzyHashLengthEncoding, LengthProcessingInfo,

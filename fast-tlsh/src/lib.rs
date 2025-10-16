@@ -69,7 +69,6 @@ mod errors;
 pub mod generate;
 pub mod hash;
 pub mod hashes;
-mod intrinsics;
 pub mod length;
 mod macros;
 mod params;
