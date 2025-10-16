@@ -15,9 +15,11 @@ use crate::internals::parse::hex_str::decode_rev_1;
 struct InnerQRatios {
     /// The "Q1 ratio" value.
     #[bits(4)]
+    #[cfg_attr(feature = "unstable", coverage(off))]
     q1ratio: u8,
     /// The "Q2 ratio" value.
     #[bits(4)]
+    #[cfg_attr(feature = "unstable", coverage(off))]
     q2ratio: u8,
 }
 
