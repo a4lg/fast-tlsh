@@ -17,6 +17,7 @@ use crate::pearson::{tlsh_b_mapping_256, tlsh_b_mapping_48};
 /// In the official TLSH implementation, the variant with this number of
 /// buckets is called "min hash".
 pub const NUM_BUCKETS_SHORT: usize = 48;
+
 /// The effective number of buckets on the normal variant.
 ///
 /// On this variant, we have 256 physical buckets but only the first half
@@ -25,6 +26,7 @@ pub const NUM_BUCKETS_SHORT: usize = 48;
 /// In the official TLSH implementation, the variant with this number of
 /// buckets is called "compact hash".
 pub const NUM_BUCKETS_NORMAL: usize = 128;
+
 /// The effective number of buckets on the long variant (with 256 buckets).
 ///
 /// In the official TLSH implementation, the variant with this number of
