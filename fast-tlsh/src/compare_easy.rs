@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! Easy comparison for two TLSH strings.
 
 #![cfg(feature = "easy-functions")]
 
 use crate::errors::{ParseErrorEither, ParseErrorSide};
-use crate::params::ConstrainedFuzzyHashType;
+use crate::internals::params::ConstrainedFuzzyHashType;
 use crate::Tlsh;
 
 /// Compare two fuzzy hashes with specified intermediate fuzzy hash type.

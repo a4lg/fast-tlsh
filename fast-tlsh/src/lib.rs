@@ -66,9 +66,7 @@ mod compare;
 mod errors;
 pub mod generate;
 pub mod hash;
-pub mod hashes;
 pub mod length;
-mod params;
 
 mod compare_easy;
 mod generate_easy;
@@ -147,5 +145,7 @@ pub mod prelude {
     pub use super::Tlsh;
     pub use super::{TlshGenerator, TlshGeneratorFor};
 }
+
+pub mod hashes;
 
 mod tests;

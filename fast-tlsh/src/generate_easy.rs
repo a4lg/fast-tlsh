@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
+// SPDX-FileCopyrightText: Copyright (C) 2024, 2025 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
 //! The easy wrapper for generator functionalities.
 
@@ -7,7 +7,7 @@
 
 use crate::errors::GeneratorError;
 use crate::generate::Generator;
-use crate::params::ConstrainedFuzzyHashType;
+use crate::internals::params::ConstrainedFuzzyHashType;
 use crate::{GeneratorType, Tlsh};
 
 /// Generates a fuzzy hash from a given buffer

@@ -17,8 +17,8 @@ use crate::errors::{OperationError, ParseError};
 use crate::hash::body::FuzzyHashBody;
 use crate::hash::checksum::FuzzyHashChecksum;
 use crate::hash::qratios::FuzzyHashQRatios;
+use crate::internals::params::{ConstrainedFuzzyHashParams, FuzzyHashParams};
 use crate::length::FuzzyHashLengthEncoding;
-use crate::params::{ConstrainedFuzzyHashParams, FuzzyHashParams};
 use crate::FuzzyHashType;
 
 pub mod body;
@@ -287,10 +287,10 @@ pub(crate) mod inner {
     use crate::hash::body::FuzzyHashBodyData;
     use crate::hash::checksum::FuzzyHashChecksumData;
     use crate::internals::macros::{invariant, optionally_unsafe};
+    use crate::internals::params::{ConstrainedVerboseFuzzyHashParams, VerboseFuzzyHashParams};
     #[cfg(not(feature = "opt-simd-convert-hex"))]
     use crate::internals::parse::hex_str::encode_array;
     use crate::internals::parse::hex_str::{encode_rev_1, encode_rev_array};
-    use crate::params::{ConstrainedVerboseFuzzyHashParams, VerboseFuzzyHashParams};
 
     /// The struct representing a fuzzy hash.
     ///

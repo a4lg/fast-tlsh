@@ -13,13 +13,13 @@ use crate::hash::checksum::{FuzzyHashChecksum, FuzzyHashChecksumData};
 use crate::hash::qratios::FuzzyHashQRatios;
 use crate::internals::intrinsics::{likely, unlikely};
 use crate::internals::macros::{invariant, optionally_unsafe};
+use crate::internals::params::{
+    ConstrainedFuzzyHashParams, ConstrainedFuzzyHashType, ConstrainedVerboseFuzzyHashParams,
+    VerboseFuzzyHashParams,
+};
 use crate::length::{
     ConstrainedLengthProcessingInfo, DataLengthProcessingMode, DataLengthValidity,
     FuzzyHashLengthEncoding, LengthProcessingInfo,
-};
-use crate::params::{
-    ConstrainedFuzzyHashParams, ConstrainedFuzzyHashType, ConstrainedVerboseFuzzyHashParams,
-    VerboseFuzzyHashParams,
 };
 use crate::{FuzzyHashType, GeneratorType};
 

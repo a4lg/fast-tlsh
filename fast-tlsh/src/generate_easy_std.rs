@@ -12,7 +12,7 @@ use std::path::Path;
 use crate::errors::GeneratorOrIOError;
 use crate::generate::Generator;
 use crate::internals::macros::{invariant, optionally_unsafe};
-use crate::params::ConstrainedFuzzyHashType;
+use crate::internals::params::ConstrainedFuzzyHashType;
 use crate::{GeneratorType, Tlsh};
 
 /// Constant temporary buffer size for "easy" functions.
