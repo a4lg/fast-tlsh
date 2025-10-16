@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 // SPDX-FileCopyrightText: Copyright (C) 2024 Tsukasa OI <floss_ssdeep@irq.a4lg.com>.
 
-//! Tests: `crate::generate::bucket_aggregation::portable_simd`.
+//! Tests: `crate::internals::generate::bucket_aggregation::portable_simd`.
 
 #![cfg(test)]
 

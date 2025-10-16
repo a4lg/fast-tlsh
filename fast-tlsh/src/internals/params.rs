@@ -36,7 +36,7 @@ pub trait ConstrainedFuzzyHashParams: private::SealedParam {
     /// The inner generator type used by the public implementation.
     ///
     /// This is an instantiation of
-    /// [`Generator`](crate::generate::inner::Generator).
+    /// [`Generator`](crate::internals::generate::Generator).
     type InnerGeneratorType: GeneratorType<Output = Self::InnerFuzzyHashType>
         + core::fmt::Debug
         + Default
@@ -124,7 +124,7 @@ macro_rules! inner_fuzzy_hash_type {
 /// The inner generator type.
 macro_rules! inner_generator_type {
     ($size_checksum:expr, $size_buckets:tt) => {
-        $crate::generate::inner::Generator<
+        $crate::internals::generate::Generator<
             {$size_checksum},
             {$size_buckets / 4},
             {$size_buckets},

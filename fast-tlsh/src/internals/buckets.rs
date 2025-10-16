@@ -4,7 +4,7 @@
 
 //! The TLSH buckets and their mappings.
 
-use crate::generate::bucket_aggregation;
+use crate::internals::generate::bucket_aggregation;
 use crate::internals::hash::body::{BODY_SIZE_LONG, BODY_SIZE_NORMAL, BODY_SIZE_SHORT};
 use crate::internals::pearson::{tlsh_b_mapping_256, tlsh_b_mapping_48};
 

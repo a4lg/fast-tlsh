@@ -322,7 +322,7 @@ pub enum DataLengthValidity {
 /// This type can be specified in following methods:
 ///
 /// *   [`DataLengthValidity::is_err_on()`]
-/// *   [`GeneratorOptions::length_processing_mode()`](crate::generate::GeneratorOptions::length_processing_mode())
+/// *   [`GeneratorOptions::length_processing_mode()`](crate::GeneratorOptions::length_processing_mode())
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum DataLengthProcessingMode {
     /// The optimistic mode (the default on the official implementation).

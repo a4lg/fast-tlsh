@@ -77,14 +77,14 @@ pub use generate_easy::{hash_buf, hash_buf_for};
 pub use generate_easy_std::{hash_file, hash_file_for, hash_stream, hash_stream_for};
 
 // Trait re-exports
-pub use generate::public::GeneratorType;
+pub use internals::generate::GeneratorType;
 pub use internals::hash::FuzzyHashType;
 
 // Type re-exports
-pub use generate::GeneratorOptions;
 pub use internals::compare::ComparisonConfiguration;
 pub use internals::errors::{GeneratorError, GeneratorErrorCategory};
 pub use internals::errors::{OperationError, ParseError};
+pub use internals::generate::GeneratorOptions;
 pub use internals::hash::HexStringPrefix;
 pub use internals::length::DataLengthProcessingMode;
 
