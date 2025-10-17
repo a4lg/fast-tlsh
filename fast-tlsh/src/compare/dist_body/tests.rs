@@ -43,7 +43,7 @@ impl BodyDistanceImpls<BODY_SIZE_SHORT> for BodyDistance<BODY_SIZE_SHORT> {
     }
 
     fn pseudo_simd_64(body1: &[u8; BODY_SIZE_SHORT], body2: &[u8; BODY_SIZE_SHORT]) -> u32 {
-        // THIS IS INTENTIONAL (since there's no distance_12 on pseudo_simd_32)
+        // THIS IS INTENTIONAL (since there's no distance_12 on pseudo_simd_64)
         pseudo_simd_32::distance_12(body1, body2)
     }
 }
