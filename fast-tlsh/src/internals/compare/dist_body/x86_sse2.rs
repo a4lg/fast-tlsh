@@ -39,24 +39,24 @@ unsafe fn packed_distance_as_u16x8(x: __m128i, y: __m128i) -> __m128i {
     let mask_nibble_0011 = _mm_set1_epi8(0b0011_0011);
     let mask_byte_00001111 = _mm_set1_epi8(0b00001111);
 
-    let z = _mm_xor_si128(x, y);
-
-    // Step by Step evaluation (independent A and B are interleaved)
+    // Step by Step evaluation (independent A and B and `xy` (Z) are interleaved)
     let ta = _mm_and_si128(y, mask_dibit_01);
     let tb = _mm_and_si128(x, mask_dibit_01);
-    let ta = _mm_or_si128(ta, _mm_slli_epi32::<1>(ta)); // * 3
+    let ra = _mm_slli_epi32::<1>(ta);
     let tb = _mm_sub_epi32(mask_dibit_10, tb);
-    let ta = _mm_xor_si128(ta, x);
+    let ta = _mm_or_si128(ta, ra); // (+1 above) (x * 3)
     let tb = _mm_xor_si128(tb, x);
-    let sa = _mm_and_si128(ta, z); // SUM 1 (2-bit sliced; 0..=3)
-    let tb = _mm_and_si128(tb, z);
+    let ta = _mm_xor_si128(ta, x);
+    let xy = _mm_xor_si128(x, y);
+    let sa = _mm_and_si128(ta, xy); // SUM 1 (2-bit sliced; 0..=3)
+    let tb = _mm_and_si128(tb, xy);
     let ta = _mm_srli_epi32::<2>(sa);
+    let rb = _mm_srli_epi32::<1>(tb);
     let sa = _mm_and_si128(sa, mask_nibble_0011);
-    let tb = _mm_srli_epi32::<1>(tb);
+    let tb = _mm_or_si128(tb, rb); // (+1 above) ((x >> 1) * 3)
     let ta = _mm_and_si128(ta, mask_nibble_0011);
-    let tb = _mm_or_si128(tb, _mm_slli_epi32::<1>(tb)); // * 3
+    let sb = _mm_and_si128(tb, xy); // SUM 2 (2-bit sliced; 0..=3)
     let sa = _mm_add_epi32(sa, ta); // SUM 1 (4-bit sliced; 0..=6)
-    let sb = _mm_and_si128(tb, z); // SUM 2 (2-bit sliced; 0..=3)
     let tb = _mm_srli_epi32::<2>(sb);
     let sb = _mm_and_si128(sb, mask_nibble_0011);
     let tb = _mm_and_si128(tb, mask_nibble_0011);

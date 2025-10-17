@@ -26,22 +26,22 @@ pub(crate) fn sub_distance(x: u32, y: u32) -> u32 {
     // Step by Step evaluation
     // Independent calculation of A and B are intentionally interleaved
     // to lower dependency to the optimizer.
-    let ta = y & mask_dibit_01;
     let tb = x & mask_dibit_01;
-    let ta = (ta << 1) + ta; // * 3 (leave possibility of arithmetic optimization)
+    let ta = y & mask_dibit_01;
     let tb = mask_dibit_10 - tb;
-    let ta = ta ^ x;
+    let ta = (ta << 1) + ta; // * 3 (leave possibility of arithmetic optimization)
     let tb = tb ^ x;
-    let sa = ta & z; // SUM 1 (2-bit sliced; 0..=3)
+    let ta = ta ^ x;
     let tb = tb & z;
+    let sa = ta & z; // SUM 1 (2-bit sliced; 0..=3)
+    let rb = tb >> 1;
     let ta = sa >> 2;
+    let tb = tb | rb; // (+1 above) (x >> 1) * 3
     let sa = sa & mask_nibble_0011;
-    let tb = tb >> 1;
-    let ta = ta & mask_nibble_0011;
-    let tb = (tb << 1) + tb; // * 3 (leave possibility of arithmetic optimization)
-    let sa = sa + ta; // SUM 1 (4-bit sliced; 0..=6)
     let sb = tb & z; // SUM 2 (2-bit sliced; 0..=3)
+    let ta = ta & mask_nibble_0011;
     let tb = sb >> 2;
+    let sa = sa + ta; // SUM 1 (4-bit sliced; 0..=6)
     let sb = sb & mask_nibble_0011;
     let tb = tb & mask_nibble_0011;
     let sb = sb + tb; // SUM 2 (4-bit sliced; 0..=6)

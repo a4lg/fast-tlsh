@@ -26,7 +26,6 @@ where
 {
     let x = Simd::<u32, N_32>::from_ne_bytes(Simd::<u8, N_8>::from_array(*body1));
     let y = Simd::<u32, N_32>::from_ne_bytes(Simd::<u8, N_8>::from_array(*body2));
-    let z = x ^ y;
 
     // Constants
     let mask_dibit_01 = Simd::<u32, N_32>::splat(0x55555555);
@@ -35,22 +34,24 @@ where
     let mask_byte_00001111 = Simd::<u32, N_32>::splat(0x0f0f0f0f);
     let value_dword_0x01010101 = Simd::<u32, N_32>::splat(0x01010101);
 
-    // Step by Step evaluation (independent A and B are interleaved)
+    // Step by Step evaluation (independent A and B and `xy` (Z) are interleaved)
     let ta = y & mask_dibit_01;
     let tb = x & mask_dibit_01;
-    let ta = ta | (ta << 1); // * 3
+    let ra = ta << 1;
     let tb = mask_dibit_10 - tb;
-    let ta = ta ^ x;
+    let ta = ta | ra; // (+1 above) (x * 3)
     let tb = tb ^ x;
-    let sa = ta & z; // SUM 1 (2-bit sliced; 0..=3)
-    let tb = tb & z;
+    let ta = ta ^ x;
+    let xy = x ^ y;
+    let sa = ta & xy; // SUM 1 (2-bit sliced; 0..=3)
+    let tb = tb & xy;
     let ta = sa >> 2;
+    let rb = tb >> 1;
     let sa = sa & mask_nibble_0011;
-    let tb = tb >> 1;
+    let tb = tb | rb; // (+1 above) ((x >> 1) * 3)
     let ta = ta & mask_nibble_0011;
-    let tb = tb | (tb << 1); // * 3
+    let sb = tb & xy; // SUM 2 (2-bit sliced; 0..=3)
     let sa = sa + ta; // SUM 1 (4-bit sliced; 0..=6)
-    let sb = tb & z; // SUM 2 (2-bit sliced; 0..=3)
     let tb = sb >> 2;
     let sb = sb & mask_nibble_0011;
     let tb = tb & mask_nibble_0011;

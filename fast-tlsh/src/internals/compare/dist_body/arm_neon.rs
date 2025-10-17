@@ -67,24 +67,25 @@ unsafe fn packed_distance_as_u16x8(x: uint8x16_t, y: uint8x16_t) -> uint16x8_t {
 
     let x = vreinterpretq_u32_u8(x);
     let y = vreinterpretq_u32_u8(y);
-    let z = veorq_u32(x, y);
 
-    // Step by Step evaluation (independent A and B are interleaved)
+    // Step by Step evaluation (independent A and B and `xy` (Z) are interleaved)
     let ta = vandq_u32(y, mask_dibit_01);
     let tb = vandq_u32(x, mask_dibit_01);
-    let ta = vorrq_u32(ta, vshlq_n_u32::<1>(ta)); // * 3
+    let ra = vshlq_n_u32::<1>(ta);
     let tb = vsubq_u32(mask_dibit_10, tb);
-    let ta = veorq_u32(ta, x);
+    let ta = vorrq_u32(ta, ra); // (+1 above) (x * 3)
     let tb = veorq_u32(tb, x);
-    let sa = vandq_u32(ta, z); // SUM 1 (2-bit sliced; 0..=3)
-    let tb = vandq_u32(tb, z);
+    let ta = veorq_u32(ta, x);
+    let xy = veorq_u32(x, y);
+    let sa = vandq_u32(ta, xy); // SUM 1 (2-bit sliced; 0..=3)
+    let tb = vandq_u32(tb, xy);
     let ta = vshrq_n_u32::<2>(sa);
+    let rb = vshrq_n_u32::<1>(tb);
     let sa = vandq_u32(sa, mask_nibble_0011);
-    let tb = vshrq_n_u32::<1>(tb);
+    let tb = vorrq_u32(tb, rb); // (+1 above) ((x >> 1) * 3)
     let ta = vandq_u32(ta, mask_nibble_0011);
-    let tb = vorrq_u32(tb, vshlq_n_u32::<1>(tb)); // * 3
+    let sb = vandq_u32(tb, xy); // SUM 2 (2-bit sliced; 0..=3)
     let sa = vaddq_u32(sa, ta); // SUM 1 (4-bit sliced; 0..=6)
-    let sb = vandq_u32(tb, z); // SUM 2 (2-bit sliced; 0..=3)
     let tb = vshrq_n_u32::<2>(sb);
     let sb = vandq_u32(sb, mask_nibble_0011);
     let tb = vandq_u32(tb, mask_nibble_0011);

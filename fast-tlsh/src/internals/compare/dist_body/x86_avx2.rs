@@ -33,24 +33,24 @@ unsafe fn packed_distance_as_u32x8(x: __m256i, y: __m256i) -> __m256i {
     let mask_byte_00001111 = _mm256_set1_epi8(0b00001111);
     let value_dword_0x01010101 = _mm256_set1_epi32(0x01010101);
 
-    let z = _mm256_xor_si256(x, y);
-
-    // Step by Step evaluation (independent A and B are interleaved)
+    // Step by Step evaluation (independent A and B and `xy` (Z) are interleaved)
     let ta = _mm256_and_si256(y, mask_dibit_01);
     let tb = _mm256_and_si256(x, mask_dibit_01);
-    let ta = _mm256_or_si256(ta, _mm256_slli_epi32::<1>(ta)); // * 3
+    let ra = _mm256_slli_epi32::<1>(ta);
     let tb = _mm256_sub_epi32(mask_dibit_10, tb);
-    let ta = _mm256_xor_si256(ta, x);
+    let ta = _mm256_or_si256(ta, ra); // (+1 above) (x * 3)
     let tb = _mm256_xor_si256(tb, x);
-    let sa = _mm256_and_si256(ta, z); // SUM 1 (2-bit sliced; 0..=3)
-    let tb = _mm256_and_si256(tb, z);
+    let ta = _mm256_xor_si256(ta, x);
+    let xy = _mm256_xor_si256(x, y);
+    let sa = _mm256_and_si256(ta, xy); // SUM 1 (2-bit sliced; 0..=3)
+    let tb = _mm256_and_si256(tb, xy);
     let ta = _mm256_srli_epi32::<2>(sa);
+    let rb = _mm256_srli_epi32::<1>(tb);
     let sa = _mm256_and_si256(sa, mask_nibble_0011);
-    let tb = _mm256_srli_epi32::<1>(tb);
+    let tb = _mm256_or_si256(tb, rb); // (+1 above) ((x >> 1) * 3)
     let ta = _mm256_and_si256(ta, mask_nibble_0011);
-    let tb = _mm256_or_si256(tb, _mm256_slli_epi32::<1>(tb)); // * 3
+    let sb = _mm256_and_si256(tb, xy); // SUM 2 (2-bit sliced; 0..=3)
     let sa = _mm256_add_epi32(sa, ta); // SUM 1 (4-bit sliced; 0..=6)
-    let sb = _mm256_and_si256(tb, z); // SUM 2 (2-bit sliced; 0..=3)
     let tb = _mm256_srli_epi32::<2>(sb);
     let sb = _mm256_and_si256(sb, mask_nibble_0011);
     let tb = _mm256_and_si256(tb, mask_nibble_0011);
