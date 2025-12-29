@@ -19,7 +19,7 @@ name = "tlsh"
 
 [dependencies]
 bitfield-struct = "0.9.5"
-bitflags = { version = "2.9.4", default-features = false }
+bitflags = { version = "2.10.0", default-features = false }
 cfg-if = "1.0.4"
 hex-simd = { version = "0.8.0", default-features = false, optional = true }
 serde = { version = "1.0.228", default-features = false, optional = true }
